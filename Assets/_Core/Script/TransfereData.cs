@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TransfereData : MonoBehaviour
 {
-    GameObject[] enemyList;
-    List<GameObject> enemyListToDestroy;
     public bool enemyIsInDestroyList;
     public int nbSwitchActive;
     public List<GameObject> enemiesToTransfere;
@@ -15,10 +13,13 @@ public class TransfereData : MonoBehaviour
     public List<int> enemyIDs;
     public int currentWeapon;
     public int storedXP;
-    static int[] needToLvUP;
     public int lvPlayer;
     public int ennemisAGenerer;
     public int enemiesMaxAGenerer;
+
+    private GameObject[] enemyList;
+    private List<GameObject> enemyListToDestroy;
+    
     public void ChangeSceneToFight(string sceneName)
     {
         playerExploPosition = GameObject.FindGameObjectWithTag("Player").gameObject.transform.position;

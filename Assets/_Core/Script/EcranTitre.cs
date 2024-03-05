@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EcranTitre : MonoBehaviour
 {
-    [SerializeField] string sceneName;
+    [SerializeField] private string sceneName;
+    
     private void Start()
     {
         FindObjectOfType<TransfereData>().ChangeScene(sceneName);

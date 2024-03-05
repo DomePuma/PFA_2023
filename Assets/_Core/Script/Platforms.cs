@@ -4,7 +4,6 @@ public class Platforms : MonoBehaviour
 {
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
-        
         if(hit.gameObject.layer == 9)
         {
             this.gameObject.transform.SetParent(hit.gameObject.transform);

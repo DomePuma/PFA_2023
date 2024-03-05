@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VictoryScreen : MonoBehaviour
 {
-    [SerializeField] Button victoryButton;
+    [SerializeField] private Button victoryButton;
 
     private void OnEnable() 
     {

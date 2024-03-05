@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    [SerializeField] GameObject uiPlayer;
-    EnemyAction enemyAction;
-    EnemyManager enemyManager;
-    TransfereData transfereData;
-    AttackScript attackScript;
-    PlayerStats[] playerStats;
-    EnemyStats[] enemyStats;
-    ChosePlayer chosePlayer;
     public int pA = 0;
-    private bool hasEnemyAtk = false;
-    public bool firstTurnPass = false;
     public int nbTurn;    
+    public bool firstTurnPass = false;
+    
+    [SerializeField] private GameObject uiPlayer;
+    
+    private EnemyAction enemyAction;
+    private EnemyManager enemyManager;
+    private TransfereData transfereData;
+    private AttackScript attackScript;
+    private PlayerStats[] playerStats;
+    private EnemyStats[] enemyStats;
+    private ChosePlayer chosePlayer;
+    private bool hasEnemyAtk = false;
 
     [Header("Paramètres des buff d'attaque")]
     public bool hasAtkBuff;
@@ -24,29 +26,11 @@ public class TurnManager : MonoBehaviour
     public bool hasDefBuff;
     public int defBuffCooldown;
     [SerializeField] float defBuffPower;
-
-
-    private void Awake() 
-    {
-        transfereData = FindObjectOfType<TransfereData>();
-        playerStats = FindObjectsOfType<PlayerStats>();
-        enemyStats = FindObjectsOfType<EnemyStats>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-        enemyAction = FindObjectOfType<EnemyAction>();
-        attackScript = FindObjectOfType<AttackScript>();
-        chosePlayer = FindObjectOfType<ChosePlayer>();
-    }
-    private void Update() 
-    {
-        if(pA <= 0 && hasEnemyAtk == false)
-        {
-            uiPlayer.SetActive(false);
-        }
-
-    }
+    
     public void PassTurn()
     {
         CheckEnemyDeath();
+        
         if(enemyManager.nbEnnemisRestants == 0)
         {
             enemyManager.EndFight();
@@ -68,72 +52,29 @@ public class TurnManager : MonoBehaviour
                 hasEnemyAtk = true;
             } 
         }
-         
     }
+
     public void EndTurnEnemy()
     {
         uiPlayer.SetActive(true);
         pA = 2;
         hasEnemyAtk = false;
-        if(!firstTurnPass) firstTurnPass = true;
-        else nbTurn++;
+        
+        if(!firstTurnPass) 
+        {
+            firstTurnPass = true;
+        }
+        else 
+        {
+            nbTurn++;
+        }
+
         FindObjectOfType<SpellManager>().isInGuard = false;
         CheckCooldown();
         CheckPlayersDeath();
     }
-    private void CheckCooldown()
-    {
-        for(int i = 0; i < enemyManager.enemis.Count; i++)
-        {
-            if(enemyManager.enemis[i].enemy.isInDefense == true)
-            {
-                if(enemyManager.enemis[i].enemy.hasCooldownDef == false) 
-                {
-                    enemyManager.enemis[i].enemy.cooldownDef = 1;
-                    enemyManager.enemis[i].enemy.hasCooldownDef = true;
-                }
-                if(enemyManager.enemis[i].enemy.isInDefense == true && enemyManager.enemis[i].enemy.cooldownDef == 0)
-                {
-                    enemyAction.currentEnemy.enemy.defense -= 100;
-                    enemyManager.enemis[i].enemy.isInDefense = false;
-                    enemyManager.enemis[i].enemy.hasCooldownDef = false;
-                } 
-                if(enemyManager.enemis[i].enemy.cooldownDef != 0) enemyManager.enemis[i].enemy.cooldownDef--;
-                if(enemyManager.enemis[i].enemy.cooldownDef < 0) enemyManager.enemis[i].enemy.cooldownDef = 0;         
-            }
-        }
-        if(hasAtkBuff)
-        {
-            attackScript.dmgModificator = atkBuffPower;
-            if(atkBuffCooldown != 0)
-            {     
-                atkBuffCooldown--;
-            }
-            else
-            {
-                hasAtkBuff = false;
-                attackScript.dmgModificator = 1;
-            }
-        }
-        for(int i = 0; i < playerStats.Length; i++)
-        {
-            playerStats[i].player.isInvincible = false;
-        }
-        if(hasDefBuff)
-        {
-            attackScript.dmgModificatorEnemy = defBuffPower;
-            if(defBuffCooldown != 0)
-            {     
-                defBuffCooldown--;
-            }
-            else
-            {
-                hasDefBuff = false;
-                attackScript.dmgModificatorEnemy = 1;
-            }
-        }
-    }
-    public void CheckEnemyDeath()
+
+    private void CheckEnemyDeath()
     {
         for(int i = 0; i < enemyStats.Length; i++)
         {
@@ -146,6 +87,73 @@ public class TurnManager : MonoBehaviour
             }
         }
     }
+
+    private void CheckCooldown()
+    {
+        for(int i = 0; i < enemyManager.enemis.Count; i++)
+        {
+            if(enemyManager.enemis[i].enemy.isInDefense == true)
+            {
+                if(enemyManager.enemis[i].enemy.hasCooldownDef == false) 
+                {
+                    enemyManager.enemis[i].enemy.cooldownDef = 1;
+                    enemyManager.enemis[i].enemy.hasCooldownDef = true;
+                }
+                
+                if(enemyManager.enemis[i].enemy.isInDefense == true && enemyManager.enemis[i].enemy.cooldownDef == 0)
+                {
+                    enemyAction.currentEnemy.enemy.defense -= 100;
+                    enemyManager.enemis[i].enemy.isInDefense = false;
+                    enemyManager.enemis[i].enemy.hasCooldownDef = false;
+                } 
+                
+                if(enemyManager.enemis[i].enemy.cooldownDef != 0) 
+                {
+                    enemyManager.enemis[i].enemy.cooldownDef--;
+                }
+                
+                if(enemyManager.enemis[i].enemy.cooldownDef < 0)
+                {
+                    enemyManager.enemis[i].enemy.cooldownDef = 0;         
+                }
+            }
+        }
+        if(hasAtkBuff)
+        {
+            attackScript.dmgModificator = atkBuffPower;
+            
+            if(atkBuffCooldown != 0)
+            {     
+                atkBuffCooldown--;
+            }
+            else
+            {
+                hasAtkBuff = false;
+                attackScript.dmgModificator = 1;
+            }
+        }
+        
+        for(int i = 0; i < playerStats.Length; i++)
+        {
+            playerStats[i].player.isInvincible = false;
+        }
+        
+        if(hasDefBuff)
+        {
+            attackScript.dmgModificatorEnemy = defBuffPower;
+            
+            if(defBuffCooldown != 0)
+            {     
+                defBuffCooldown--;
+            }
+            else
+            {
+                hasDefBuff = false;
+                attackScript.dmgModificatorEnemy = 1;
+            }
+        }
+    }
+    
     private void CheckPlayersDeath()
     {
         for(int i = 0; i < playerStats.Length; i++)
@@ -157,5 +165,24 @@ public class TurnManager : MonoBehaviour
                 chosePlayer.PlayerDeath();
             }
         }
+    }
+
+    private void Update() 
+    {
+        if(pA <= 0 && hasEnemyAtk == false)
+        {
+            uiPlayer.SetActive(false);
+        }
+    }
+
+    private void Awake() 
+    {
+        transfereData = FindObjectOfType<TransfereData>();
+        playerStats = FindObjectsOfType<PlayerStats>();
+        enemyStats = FindObjectsOfType<EnemyStats>();
+        enemyManager = FindObjectOfType<EnemyManager>();
+        enemyAction = FindObjectOfType<EnemyAction>();
+        attackScript = FindObjectOfType<AttackScript>();
+        chosePlayer = FindObjectOfType<ChosePlayer>();
     }
 }

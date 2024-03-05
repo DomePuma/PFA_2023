@@ -3,15 +3,17 @@ using UnityEngine.UI;
 
 public class HealthBarEnemy : MonoBehaviour
 {
-    [SerializeField] int nbEnemy;
-    EnemyStats enemyStats;
-    [SerializeField] Image healthBar;
-    private void Start() 
-    {
-        enemyStats = FindObjectOfType<EnemyManager>().enemis[nbEnemy];
-    }
+    [SerializeField] private privateint nbEnemy;
+    [SerializeField] private Image healthBar;
+    private EnemyStats enemyStats;
+    
     private void Update() 
     {
         healthBar.fillAmount = (enemyStats.enemy.health/enemyStats.enemy.maxHealth);
+    }
+
+    private void Start() 
+    {
+        enemyStats = FindObjectOfType<EnemyManager>().enemis[nbEnemy];
     }
 }

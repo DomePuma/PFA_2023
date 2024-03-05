@@ -3,15 +3,27 @@ using System.Collections;
 
 public class StartFight : MonoBehaviour
 {
-    TurnManager turnManager;
-    TransfereData transfereData;
-    [SerializeField] PlayerStats gray;
-    [SerializeField] GameObject UI;
-    private void Awake() 
+    [SerializeField] private PlayerStats gray;
+    [SerializeField] private GameObject UI;
+
+    private TurnManager turnManager;
+    private TransfereData transfereData;
+    
+    private IEnumerator FirstTurn()
     {
-        transfereData = FindObjectOfType<TransfereData>();
-        turnManager = FindObjectOfType<TurnManager>();
+        yield return new WaitForSecondsRealtime(1);
+        
+        if(GameObject.FindGameObjectWithTag("TransfereData").GetComponent<TransfereData>().enemyStartFight == true)
+        {
+            turnManager.PassTurn();
+        }
+        else
+        {
+            turnManager.pA = 2;
+            UI.SetActive(true);
+        }
     }
+
     private void Start()
     {
         switch(transfereData.currentWeapon)
@@ -32,19 +44,13 @@ public class StartFight : MonoBehaviour
                 gray.gameObject.GetComponentInChildren<Animator>().SetTrigger("StartMarteau");
                 break;
         }
+        
         StartCoroutine(FirstTurn());
     }
-    private IEnumerator FirstTurn()
+
+    private void Awake() 
     {
-        yield return new WaitForSecondsRealtime(1);
-        if(GameObject.FindGameObjectWithTag("TransfereData").GetComponent<TransfereData>().enemyStartFight == true)
-        {
-            turnManager.PassTurn();
-        }
-        else
-        {
-            turnManager.pA = 2;
-            UI.SetActive(true);
-        }
+        transfereData = FindObjectOfType<TransfereData>();
+        turnManager = FindObjectOfType<TurnManager>();
     }
 }

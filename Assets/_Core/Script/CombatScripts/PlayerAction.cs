@@ -3,34 +3,28 @@ using System.Collections;
 
 public class PlayerAction : MonoBehaviour
 {
-    ChosePlayer chosePlayer;
-    EnemyManager enemyManager;
-    AttackScript attackScript;
-    UISelect uISelect;
-    TurnManager turnManager;
-    [SerializeField] GameObject uiSorts;
-    [SerializeField] GameObject[] uiEquipe; 
-    [SerializeField] GameObject[] spells;
+    [SerializeField] private GameObject uiSorts;
+    [SerializeField] private GameObject[] uiEquipe; 
+    [SerializeField] private GameObject[] spells;
     
-    
-    private void Awake() 
-    {
-        chosePlayer = FindObjectOfType<ChosePlayer>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-        attackScript = FindObjectOfType<AttackScript>();
-        turnManager = FindObjectOfType<TurnManager>();
-        uISelect = FindObjectOfType<UISelect>();
-    }
+    private ChosePlayer chosePlayer;
+    private EnemyManager enemyManager;
+    private AttackScript attackScript;
+    private UISelect uISelect;
+    private TurnManager turnManager;
+
     public void Atk()
     {
         chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("Attack");
         attackScript.Attack(enemyManager.currentEnnemi);
         turnManager.pA = 0;
     }
+
     public void SpecialMove()
     {
         Debug.Log("Attaques Spéciales");
         uiSorts.SetActive(true);
+        
         switch(chosePlayer.currentPlayer)
         {
             case 0:
@@ -53,6 +47,7 @@ public class PlayerAction : MonoBehaviour
             }
         }
     }
+
     public void Epuipe()
     {
         Debug.Log("Equipe");
@@ -81,20 +76,18 @@ public class PlayerAction : MonoBehaviour
             }
         }
     }
+
     public void Fuite(string sceneName)
     {
         for(int i = 0; i < chosePlayer.players.Count; i++)
         {
             chosePlayer.players[i].gameObject.GetComponentInChildren<Animator>().SetTrigger("Fuite");
         }
+
         StartCoroutine(FuiteTimer(sceneName));
         
     }
-    private IEnumerator FuiteTimer(string sceneName)
-    {
-        yield return new WaitForSecondsRealtime(3);
-        FindObjectOfType<TransfereData>().Fuite(sceneName);
-    }
+
     public void QuitUI()
     {
         switch(chosePlayer.currentPlayer)
@@ -116,15 +109,33 @@ public class PlayerAction : MonoBehaviour
                 break;
             }
         }
+
         uiSorts.SetActive(false);
         uISelect.SelectAtk();
     }
+
     public void QuitEquipe()
     {
         for(int i = 0; i < uiEquipe.Length; i++)
         {
             uiEquipe[i].SetActive(false);
         }
+
         uISelect.SelectAtk();
+    }
+
+    private IEnumerator FuiteTimer(string sceneName)
+    {
+        yield return new WaitForSecondsRealtime(3);
+        FindObjectOfType<TransfereData>().Fuite(sceneName);
+    }
+
+    private void Awake() 
+    {
+        chosePlayer = FindObjectOfType<ChosePlayer>();
+        enemyManager = FindObjectOfType<EnemyManager>();
+        attackScript = FindObjectOfType<AttackScript>();
+        turnManager = FindObjectOfType<TurnManager>();
+        uISelect = FindObjectOfType<UISelect>();
     }
 }

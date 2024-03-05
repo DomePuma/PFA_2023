@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AudioStartOST : MonoBehaviour
 {
-    [SerializeField] AudioSource ost;
+    [SerializeField] private AudioSource ost;
 
     private void Start()
     {

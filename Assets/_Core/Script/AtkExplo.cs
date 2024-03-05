@@ -1,8 +1,10 @@
 using UnityEngine;
 public class AtkExplo : MonoBehaviour
 {
-    [SerializeField] string fightSceneName;
-    bool hasEnemyHit;
+    [SerializeField] private string fightSceneName;
+    
+    private bool hasEnemyHit;
+    
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Weapon" && hasEnemyHit == false)

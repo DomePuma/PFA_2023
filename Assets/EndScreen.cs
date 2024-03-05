@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField] GameObject endScreen;
-    [SerializeField] GameObject creditScreen;
-    [SerializeField] Button quitGame;
-    [SerializeField] Button reloadGame;
+    [SerializeField] private GameObject endScreen;
+    [SerializeField] private GameObject creditScreen;
+    [SerializeField] private Button quitGame;
+    [SerializeField] private Button reloadGame;
 
     public void EndScreenGame()
     {

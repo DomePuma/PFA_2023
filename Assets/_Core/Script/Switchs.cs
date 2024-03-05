@@ -6,6 +6,7 @@ public class Switchs : MonoBehaviour
     private void OnCollisionEnter(Collision other) 
     {
         Debug.Log("Button");
+        
         if(other.gameObject.tag == "Weapon" && 
         other.gameObject.GetComponentInParent<StarterAssets.ThirdPersonController>()._currentWeapon == 2 &&
         other.gameObject.GetComponentInParent<StarterAssets.ThirdPersonController>().isAttacking &&

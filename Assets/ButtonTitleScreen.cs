@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class ButtonTitleScreen : MonoBehaviour
 {
-    [SerializeField] GameObject titleScreen;
-    [SerializeField] GameObject creditsScreen;
-    [SerializeField] GameObject storyScreen;
-    [SerializeField] Button creditsButton;
-    [SerializeField] Button attackButton;
-    [SerializeField] Button storyButton;
+    [SerializeField] private GameObject titleScreen;
+    [SerializeField] private GameObject creditsScreen;
+    [SerializeField] private GameObject storyScreen;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private Button attackButton;
+    [SerializeField] private Button storyButton;
     public void UIButtonStart()
     {
         titleScreen.SetActive(false);

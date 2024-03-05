@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 public class DetectionEnnemis : MonoBehaviour
 {
     [SerializeField] string sceneName;
+    
     bool hasEnemyHit;
+    
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
         if(hit.gameObject.tag == "Enemy")

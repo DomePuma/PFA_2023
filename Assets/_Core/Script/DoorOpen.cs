@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
-    [SerializeField] int nbSwitchNeed;
-    TransfereData transfereData;
-    [SerializeField] GameObject[] doorParts;
+    [SerializeField] private int nbSwitchNeed;
+    [SerializeField] private GameObject[] doorParts;
+    
+    private TransfereData transfereData;
+
     void Awake() 
     {
         transfereData = FindObjectOfType<TransfereData>();
     }
+    
     void Update()
     {
         if(transfereData.nbSwitchActive == nbSwitchNeed)

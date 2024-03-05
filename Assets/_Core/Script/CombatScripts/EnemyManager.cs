@@ -4,36 +4,81 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
-    TransfereData transfereData;
-    List<GameObject> enemisObj;
     public List<EnemyStats> enemis;
     public EnemyStats currentEnnemi;
     public Vector3 currentEnnemiPosition;
     public Vector3 currentEnnemiAtkPosition;
-    [SerializeField] GameObject[] prefabEnnemis;
     public GameObject[] emplacementEnnemis;
-    [SerializeField] GameObject[] emplacementAtkEnnemis;
-    [SerializeField] GameObject[] hpBarEnemy;
-    [SerializeField] GameObject[] defBuffUI;
-    int nbEnemies;
-    int enemyOrder;
     public float nbEnnemisRestants;
     public float xp;
-    [SerializeField] GameObject victoryScreen;
-    [SerializeField] int ennemisAGenerer;
-    [SerializeField] int ennemisMaxAGenerer;
+    
+    [SerializeField] private GameObject[] prefabEnnemis;
+    [SerializeField] private GameObject[] emplacementAtkEnnemis;
+    [SerializeField] private GameObject[] hpBarEnemy;
+    [SerializeField] private GameObject[] defBuffUI;
+    [SerializeField] private GameObject victoryScreen;
+    [SerializeField] private int ennemisAGenerer;
+    [SerializeField] private int ennemisMaxAGenerer;
 
-    private void Awake() 
+    private int nbEnemies;
+    private TransfereData transfereData;
+    private List<GameObject> enemisObj;
+    private int enemyOrder;
+
+    public void SelectEnnemi()
     {
-        transfereData = FindObjectOfType<TransfereData>();
-        generateEnnemis();   
+        enemyOrder++;
+        //if(enemyOrder > nbEnnemisRestants) enemyOrder = 0;
+        if(enemyOrder > 2) 
+        {
+            enemyOrder = 0;
+        }
+
+        currentEnnemi.selectLight.SetActive(false);
+        currentEnnemi = enemis[enemyOrder];
+        
+        if(currentEnnemi.enemy.dead == true) 
+        {
+            SelectEnnemi();
+        }
+        
+        currentEnnemiPosition = emplacementEnnemis[enemyOrder].transform.position;
+        currentEnnemiAtkPosition = emplacementAtkEnnemis[enemyOrder].transform.position;
+        currentEnnemi.selectLight.SetActive(true);
     }
+
+    public void EnemyDeath()
+    {
+        nbEnnemisRestants--;
+        currentEnnemi.gameObject.GetComponentInChildren<Animator>().SetBool("Death", true);
+        //currentEnnemi.gameObject.SetActive(false);
+        if(nbEnnemisRestants == 0) EndFight();
+        else SelectEnnemi();
+    }
+
+    public void EndFight()
+    {
+        victoryScreen.SetActive(true);
+        transfereData.DestroyEnnemisList();
+    }
+
+    private int RandomNumberEnemy()
+    {
+        return Random.Range(ennemisAGenerer,ennemisMaxAGenerer);
+    }
+
+    private GameObject RandomTypeEnemy()
+    {
+        return Instantiate(prefabEnnemis[Random.Range(0,3)]);
+    }
+
     private void generateEnnemis()
     {
         ennemisAGenerer = transfereData.ennemisAGenerer;
         ennemisMaxAGenerer = transfereData.enemiesMaxAGenerer; 
         enemisObj = transfereData.enemiesToTransfere;
         nbEnemies = RandomNumberEnemy();
+        
         switch(nbEnemies)
         {
             case 0:
@@ -49,6 +94,7 @@ public class EnemyManager : MonoBehaviour
                 hpBarEnemy[2].SetActive(true);
                 break;
         }
+        
         for (int j = 0; j < enemisObj.Count; j++)
         {
             enemis.Add(enemisObj[j].GetComponentInChildren<EnemyStats>());
@@ -95,43 +141,17 @@ public class EnemyManager : MonoBehaviour
             enemis[j].defUI = defBuffUI[j];
             enemis[j].enemy.changeEnemy = this;
         }
+        
         nbEnnemisRestants = enemis.Count;
         currentEnnemi = enemis[0];
         currentEnnemiPosition = emplacementEnnemis[0].transform.position;
         currentEnnemiAtkPosition = emplacementAtkEnnemis[0].transform.position;
         currentEnnemi.selectLight.SetActive(true);
     }
-    private int RandomNumberEnemy()
+
+    private void Awake() 
     {
-        return Random.Range(ennemisAGenerer,ennemisMaxAGenerer);
-    }
-    private GameObject RandomTypeEnemy()
-    {
-        return Instantiate(prefabEnnemis[Random.Range(0,3)]);
-    }
-    public void SelectEnnemi()
-    {
-        enemyOrder++;
-        //if(enemyOrder > nbEnnemisRestants) enemyOrder = 0;
-        if(enemyOrder > 2) enemyOrder = 0;
-        currentEnnemi.selectLight.SetActive(false);
-        currentEnnemi = enemis[enemyOrder];
-        if(currentEnnemi.enemy.dead == true) SelectEnnemi();
-        currentEnnemiPosition = emplacementEnnemis[enemyOrder].transform.position;
-        currentEnnemiAtkPosition = emplacementAtkEnnemis[enemyOrder].transform.position;
-        currentEnnemi.selectLight.SetActive(true);
-    }
-    public void EnemyDeath()
-    {
-        nbEnnemisRestants--;
-        currentEnnemi.gameObject.GetComponentInChildren<Animator>().SetBool("Death", true);
-        //currentEnnemi.gameObject.SetActive(false);
-        if(nbEnnemisRestants == 0) EndFight();
-        else SelectEnnemi();
-    }
-    public void EndFight()
-    {
-        victoryScreen.SetActive(true);
-        transfereData.DestroyEnnemisList();
+        transfereData = FindObjectOfType<TransfereData>();
+        generateEnnemis();   
     }
 }

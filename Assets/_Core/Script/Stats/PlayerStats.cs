@@ -3,27 +3,12 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] public PlayerStat player = new PlayerStat("", 1);
-    private void Awake() 
+
+    public void LevelUP()
     {
-        if(player.playerName == null||player.playerName == "")
-        {
-            Debug.Break();
-        }
-        if(this.gameObject.tag != "Gray")
-        {
-            player.typeArmes = TypeArme.Autre;
-        }
-        else
-        {
-            player.typeArmes = TypeArme.Ciseaux;
-        }
-        player.soundManager = FindObjectOfType<SoundManager>();
-        
-        
+        player.Level_up_stat(1);
     }
-    private void Start() {
-        player.StartStats(FindObjectOfType<TransfereData>().lvPlayer);
-    }
+
     private void Update() 
     {
         if(player.health >= player.maxHealth)
@@ -39,9 +24,28 @@ public class PlayerStats : MonoBehaviour
             player.attack = player.maxAttack;
         }
     }
-    public void LevelUP()
+    
+    private void Start() 
     {
-        player.Level_up_stat(1);
+        player.StartStats(FindObjectOfType<TransfereData>().lvPlayer);
+    }
+
+    private void Awake() 
+    {
+        if(player.playerName == null||player.playerName == "")
+        {
+            Debug.Break();
+        }
+        if(this.gameObject.tag != "Gray")
+        {
+            player.typeArmes = TypeArme.Autre;
+        }
+        else
+        {
+            player.typeArmes = TypeArme.Ciseaux;
+        }
+        
+        player.soundManager = FindObjectOfType<SoundManager>();
     }
 }
 [System.Serializable]
@@ -57,17 +61,17 @@ public class Basestat
 public class PlayerStat:Basestat
 {
     [Header("Autres Stats")]
-    internal SoundManager soundManager;
+    [SerializeField] internal string playerName ="";
+    [SerializeField] internal float level;
+    
     public TypeArme typeArmes;
     public Sprite icon;
-
-    [SerializeField] internal string playerName ="";
-    
-    internal float maxHealth, maxAttack, maxDefense;
     public float health, attack, defense;
     public bool isInvincible;
     public bool dead = false;
-    [SerializeField] internal float level;
+    
+    internal float maxHealth, maxAttack, maxDefense;
+    internal SoundManager soundManager;
 
     [Header("Level Up Stats")]
     [SerializeField] internal float healthUp;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChangeScene : MonoBehaviour
 {
     [SerializeField] string sceneName;
+    
     private void OnTriggerEnter(Collider other) 
     {
         FindObjectOfType<TransfereData>().ChangeScene(sceneName);

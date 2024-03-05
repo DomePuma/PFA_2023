@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class ParticleEnd : MonoBehaviour
 {
-    [SerializeField] GameObject mainParticle;
+    [SerializeField] private GameObject mainParticle;
+    
     void Start()
     {
         var main = this.gameObject.GetComponent<ParticleSystem>().main;

@@ -5,6 +5,7 @@ public class Fps : MonoBehaviour
 {
     private float count;
     private GUIStyle guiStyle = new GUIStyle();
+    
     private IEnumerator Start()
     {
         GUI.depth = 2;

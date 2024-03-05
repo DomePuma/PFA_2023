@@ -4,48 +4,26 @@ public class SoundManager : MonoBehaviour
 {
 
     [Header("Weapons")]
-    [SerializeField] AudioClip fightSword;
-    [SerializeField] AudioClip fightPickaxe;
-    [SerializeField] AudioClip fightHammer;
-    [SerializeField] AudioClip fightMajAttack;
+    [SerializeField] private AudioClip fightSword;
+    [SerializeField] private AudioClip fightPickaxe;
+    [SerializeField] private AudioClip fightHammer;
+    [SerializeField] private AudioClip fightMajAttack;
 
     [Header("Buffs")]
-    [SerializeField] AudioClip fightAtkBuff;
-    [SerializeField] AudioClip fightDefPosition;
+    [SerializeField] private AudioClip fightAtkBuff;
+    [SerializeField] private AudioClip fightDefPosition;
     
     [Header("Spells")]
-    [SerializeField] AudioClip fightHeal;
-    [SerializeField] AudioClip fightSwitch;
+    [SerializeField] private AudioClip fightHeal;
+    [SerializeField] private AudioClip fightSwitch;
 
     [Header("Other")]
-    [SerializeField] AudioClip fightHurt;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip fightHurt;
+    [SerializeField] private AudioSource audioSource;
 
-    EnemyStats[] ennemis;
-    PlayerStats[] players;
+    private EnemyStats[] ennemis;
+    private PlayerStats[] players;
     
-    private void Start()
-    {
-        enemyConfigSound();
-        playerConfigSound();
-    }
-    private void enemyConfigSound()
-    {
-        ennemis = FindObjectsOfType<EnemyStats>();
-        for(int i = 0; i < ennemis.Length; i++)
-        {
-            ennemis[i].enemy.soundManager = this;
-        }
-    }
-    private void playerConfigSound()
-    {
-        players = FindObjectsOfType<PlayerStats>();
-        for(int i = 0; i < players.Length; i++)
-        {
-            players[i].player.soundManager = this;
-        }
-
-    }
     public void SoundFightSword()
     {
         audioSource.clip = fightSword;
@@ -95,5 +73,32 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.clip = fightSwitch;
         audioSource.Play();
+    }
+
+    private void enemyConfigSound()
+    {
+        ennemis = FindObjectsOfType<EnemyStats>();
+        
+        for(int i = 0; i < ennemis.Length; i++)
+        {
+            ennemis[i].enemy.soundManager = this;
+        }
+    }
+
+    private void playerConfigSound()
+    {
+        players = FindObjectsOfType<PlayerStats>();
+        
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].player.soundManager = this;
+        }
+
+    }
+
+    private void Start()
+    {
+        enemyConfigSound();
+        playerConfigSound();
     }
 }

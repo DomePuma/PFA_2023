@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class ChangeEnemySpwanNumber : MonoBehaviour
 {
-    [SerializeField] int ennemisAGenerer;
-    [SerializeField] int enemiesMaxAGenerer;
-    TransfereData transfereData;
-    private void Awake() {
-        transfereData = FindObjectOfType<TransfereData>();
-    }
+    [SerializeField] private int ennemisAGenerer;
+    [SerializeField] private int enemiesMaxAGenerer;
+    private TransfereData transfereData;
+    
     private void OnTriggerEnter(Collider other) 
     {
         if(other.tag == "Weapon")
@@ -17,5 +15,10 @@ public class ChangeEnemySpwanNumber : MonoBehaviour
             transfereData.enemiesMaxAGenerer = enemiesMaxAGenerer;
             transfereData.ennemisAGenerer = ennemisAGenerer;
         }
+    }
+
+    private void Awake() 
+    {
+        transfereData = FindObjectOfType<TransfereData>();
     }
 }

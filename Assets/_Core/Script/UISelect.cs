@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class UISelect : MonoBehaviour
 {
-    [SerializeField] Button equipeGrayScreen;
-    [SerializeField] Button equipeAsthymScreen;
-    [SerializeField] Button equipeMajScreen;
-    [SerializeField] Button sortsGray;
-    [SerializeField] Button sortsAsthym;
-    [SerializeField] Button sortsMaj;
-    [SerializeField] Button attack;
+    [SerializeField] private Button equipeGrayScreen;
+    [SerializeField] private Button equipeAsthymScreen;
+    [SerializeField] private Button equipeMajScreen;
+    [SerializeField] private Button sortsGray;
+    [SerializeField] private Button sortsAsthym;
+    [SerializeField] private Button sortsMaj;
+    [SerializeField] private Button attack;
 
-    [SerializeField] Button graySword;
-    [SerializeField] Button grayPickaxe;       
-    [SerializeField] Button grayHammer;
+    [SerializeField] private Button graySword;
+    [SerializeField] private Button grayPickaxe;       
+    [SerializeField] private Button grayHammer;
 
     
     public void SelectGraySword()
