@@ -46,6 +46,8 @@ public class StartFight : MonoBehaviour
         }
         
         StartCoroutine(FirstTurn());
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Awake() 

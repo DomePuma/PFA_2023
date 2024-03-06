@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToPlayer : StateMachineBehaviour
@@ -15,7 +13,7 @@ public class GoToPlayer : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Vector3 velocity = Vector3.zero;
-        GameObject currentPlayerEmplacementAtk = FindObjectOfType<ChosePlayer>().currentPlayerEmplacementAtk;
+        GameObject currentPlayerEmplacementAtk = FindObjectOfType<ChosePlayer>().CurrentPlayerEmplacementAtk;
         EnemyAction enemyAction = FindObjectOfType<EnemyAction>();
         enemyAction.currentEnemy.gameObject.transform.position = Vector3.SmoothDamp(enemyAction.currentEnemy.gameObject.transform.position, currentPlayerEmplacementAtk.transform.position, ref velocity, speed * Time.deltaTime); 
     }

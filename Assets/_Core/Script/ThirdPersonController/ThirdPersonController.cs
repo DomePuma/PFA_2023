@@ -384,12 +384,12 @@ namespace StarterAssets
         
         private void ChangeArme()
         {
-            if(_input.changeWeaponUp)
+            if(_input.changeWeapon > 0)
             {
                 Debug.Log("CurrentWeaponUp");
                 _currentWeapon++;
             }
-            if(_input.changeWeaponDown)
+            if(_input.changeWeapon < 0)
             {
                 Debug.Log("CurrentWeaponDown");
                 _currentWeapon--;
@@ -431,8 +431,7 @@ namespace StarterAssets
                     break;
             }
 
-            _input.changeWeaponUp = false;
-            _input.changeWeaponDown = false; 
+            _input.changeWeapon = 0; 
         }
         
         private void OpenMenu()

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
+    public bool isInGuard;
+    
     [SerializeField] private GameObject panneauArmes;
     [SerializeField] private GameObject healParticle;
     [SerializeField] private GameObject atkParticle;
@@ -13,7 +15,6 @@ public class SpellManager : MonoBehaviour
     private PlayerStats[] player;
     private TurnManager turnManager;
     private ChosePlayer chosePlayer;
-    private bool isInGuard;
 
     public void ChangementArmes()
     {
@@ -27,7 +28,7 @@ public class SpellManager : MonoBehaviour
         {
             Debug.Log("Mise En Guard");
             playerAction.QuitUI();
-            chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("Garde");
+            chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Garde");
             isInGuard = true;
             turnManager.pA -= 2;
         }
@@ -44,7 +45,7 @@ public class SpellManager : MonoBehaviour
         turnManager.hasDefBuff = true;
         turnManager.defBuffCooldown = 3;
         turnManager.pA -= 1;
-        chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("BouclierHumain");
+        chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("BouclierHumain");
         defParticle.SetActive(true);
     }
 
@@ -53,10 +54,10 @@ public class SpellManager : MonoBehaviour
         if(turnManager.pA == 2)
         {
             Debug.Log("Position de Defense");
-            chosePlayer.player.GetComponentInChildren<PlayerStats>().player.isInvincible = true;
+            chosePlayer.Player.GetComponentInChildren<PlayerStats>().player.isInvincible = true;
             playerAction.QuitUI();
             turnManager.pA -= 2;
-            chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("PositionDeDefense");
+            chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("PositionDeDefense");
             soundManager.SoundFightDefPosition();
         }
         else
@@ -75,7 +76,7 @@ public class SpellManager : MonoBehaviour
 
         playerAction.QuitUI();
         turnManager.pA -= 1;
-        chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("Heal");
+        chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Heal");
         soundManager.SoundFightHeal();
         healParticle.SetActive(true);
     }
@@ -89,7 +90,7 @@ public class SpellManager : MonoBehaviour
             turnManager.atkBuffCooldown = 3;
             playerAction.QuitUI();
             turnManager.pA -= 2;
-            chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("Amplifie");
+            chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Amplifie");
             soundManager.SoundFightAtkBuff();
             atkParticle.SetActive(true);
         }

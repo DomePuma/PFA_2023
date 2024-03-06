@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToEmplacementPlayer : StateMachineBehaviour
@@ -16,7 +14,7 @@ public class GoToEmplacementPlayer : StateMachineBehaviour
     {
         Vector3 velocity = Vector3.zero;
         ChosePlayer chosePlayer = FindObjectOfType<ChosePlayer>();
-        chosePlayer.player.transform.position = Vector3.SmoothDamp(chosePlayer.player.transform.position, chosePlayer.currentPlayerEmplacement.transform.position, ref velocity, speed * Time.deltaTime);
+        chosePlayer.Player.transform.position = Vector3.SmoothDamp(chosePlayer.Player.transform.position, chosePlayer.CurrentPlayerEmplacement.transform.position, ref velocity, speed * Time.deltaTime);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakableRocks : MonoBehaviour
@@ -12,8 +10,8 @@ public class BreakableRocks : MonoBehaviour
         other.gameObject.GetComponentInParent<StarterAssets.ThirdPersonController>().isAttacking &&
         !hasBeenBreak)
         {
-            Rigidbody rocks = GetComponentsInChildren<Rigidbody>();
-            BoxCollider boxCollider = GetComponents<BoxCollider>();
+            Rigidbody[] rocks = GetComponentsInChildren<Rigidbody>();
+            BoxCollider[] boxCollider = GetComponents<BoxCollider>();
             
             for(int i = 0; i < rocks.Length; i++)
             {

@@ -5,8 +5,11 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-	public class StarterAssetsInputs : MonoBehaviour
-	{
+    public class StarterAssetsInputs : MonoBehaviour
+	{	
+		private PlayerInput _playerInput;
+		
+
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -14,8 +17,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool interact;
 		public bool attack;
-		public bool changeWeaponUp;
-		public bool changeWeaponDown;
+		public float changeWeapon;
 		public bool menu;
 
 		[Header("Movement Settings")]
@@ -26,7 +28,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -44,33 +46,21 @@ namespace StarterAssets
 			JumpInput(value.isPressed);
 		}
 
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
-		}
-		public void OnInteract(InputValue value)
-		{
-			InteractInput(value.isPressed);
-		}
 		public void OnAttack(InputValue value)
 		{
 			AttackInput(value.isPressed);
 		}
-		public void OnChangeWeaponUp(InputValue value)
+		public void OnChangeWeapon(InputValue value)
 		{
-			ChangeWeaponUpInput(value.isPressed);
+			Debug.Log(value);
+			ChangeWeaponInput(value.Get<float>());
 		}
-		public void OnChangeWeaponDown(InputValue value)
-		{
-			ChangeWeaponDownInput(value.isPressed);
-		}
-		public void OnMenu(InputValue value)
+
+        public void OnMenu(InputValue value)
 		{
 			Menu(value.isPressed);
 		}
 #endif
-
-
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
@@ -86,26 +76,13 @@ namespace StarterAssets
 			jump = newJumpState;
 		}
 
-		public void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
-		}
-
-		public void InteractInput(bool newInteractState)
-		{
-			interact = newInteractState;
-		}
 		public void AttackInput(bool newAttackState)
 		{
 			attack = newAttackState;
 		}
-		public void ChangeWeaponUpInput(bool newChangeWeaponUpState)
+		public void ChangeWeaponInput(float newChangeWeaponUpState)
 		{
-			changeWeaponUp = newChangeWeaponUpState;
-		}
-		public void ChangeWeaponDownInput(bool newChangeWeaponDownState)
-		{
-			changeWeaponDown = newChangeWeaponDownState;
+			changeWeapon = newChangeWeaponUpState;
 		}
 		public void Menu(bool newMenuState)
 		{
@@ -119,6 +96,32 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+
+		private void ListenInput(bool isListening)
+		{
+			if(isListening) 
+			{
+				_playerInput.ActivateInput();
+			}
+			else 
+			{
+				_playerInput.DeactivateInput();
+			}
+		}
+		private void OnDisable()
+		{
+			PauseMenuButtons.DeactivateInputAction -= ListenInput;
+		}
+
+		private void OnEnable()
+		{
+			PauseMenuButtons.DeactivateInputAction += ListenInput;
+		}
+
+		private void Awake()
+		{
+			_playerInput = GetComponent<PlayerInput>();
 		}
 	}
 	

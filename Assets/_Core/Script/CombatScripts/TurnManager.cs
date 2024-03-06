@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    public int pA = 0;
-    public int nbTurn;    
+    public int pA = 0;  
     public bool firstTurnPass = false;
     
     [SerializeField] private GameObject uiPlayer;
@@ -64,10 +63,6 @@ public class TurnManager : MonoBehaviour
         {
             firstTurnPass = true;
         }
-        else 
-        {
-            nbTurn++;
-        }
 
         FindObjectOfType<SpellManager>().isInGuard = false;
         CheckCooldown();
@@ -120,7 +115,7 @@ public class TurnManager : MonoBehaviour
         }
         if(hasAtkBuff)
         {
-            attackScript.dmgModificator = atkBuffPower;
+            attackScript.DamageModificator = atkBuffPower;
             
             if(atkBuffCooldown != 0)
             {     
@@ -129,7 +124,7 @@ public class TurnManager : MonoBehaviour
             else
             {
                 hasAtkBuff = false;
-                attackScript.dmgModificator = 1;
+                attackScript.DamageModificator = 1;
             }
         }
         
@@ -140,7 +135,7 @@ public class TurnManager : MonoBehaviour
         
         if(hasDefBuff)
         {
-            attackScript.dmgModificatorEnemy = defBuffPower;
+            attackScript.DamageModificatorEnemy = defBuffPower;
             
             if(defBuffCooldown != 0)
             {     
@@ -149,7 +144,7 @@ public class TurnManager : MonoBehaviour
             else
             {
                 hasDefBuff = false;
-                attackScript.dmgModificatorEnemy = 1;
+                attackScript.DamageModificatorEnemy = 1;
             }
         }
     }

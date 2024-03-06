@@ -4,22 +4,23 @@ using TMPro;
 
 public class CharacterInfo : MonoBehaviour
 {
-    [SerializeField] private ChosePlayer player;
-    [SerializeField] private Image currentIcon;
-    [SerializeField] private TMP_Text currentName;
-    [SerializeField] private Sprite deadPlaceHolder;
+    [SerializeField] private ChosePlayer _chosePlayer;
+    [SerializeField] private Image _currentIcon;
+    [SerializeField] private TMP_Text _currentName;
 
-    private void Update() 
+    private void ChangeCharacterInfo()
     {
-        if(player.player == player.dead)
-        {
-           currentIcon.sprite = deadPlaceHolder;
-           currentName.text = "Dead";
-        }
-        else
-        {
-            currentIcon.sprite = player.player.GetComponentInChildren<PlayerStats>().player.icon;
-            currentName.text = player.player.GetComponentInChildren<PlayerStats>().player.playerName;
-        }    
+        _currentIcon.sprite = _chosePlayer.Player.GetComponentInChildren<PlayerStats>().player.icon;
+        _currentName.text = _chosePlayer.Player.GetComponentInChildren<PlayerStats>().player.playerName;
+    }
+
+    private void OnDisable()
+    {
+        _chosePlayer.ActionSendCharacterInfo -= ChangeCharacterInfo;
+    }
+
+    private void OnEnable()
+    {
+        _chosePlayer.ActionSendCharacterInfo += ChangeCharacterInfo;
     }
 }

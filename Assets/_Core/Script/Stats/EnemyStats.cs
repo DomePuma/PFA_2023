@@ -102,6 +102,11 @@ public class EnemyStat:BaseEnemyStat
         soundManager.SoundFightEnemyHurt();
     }
 
+    internal void RefilStats()
+    {
+        this.defense = this.maxDefense;
+    }
+    
     private void Stats()
     {
         this.health = this.maxHealth;

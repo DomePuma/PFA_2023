@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.1
+  m_fontSize: 25.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3601,7 +3601,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.25
+  m_fontSize: 23.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4082,7 +4082,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.35
+  m_fontSize: 28.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6612,15 +6612,15 @@ MonoBehaviour:
     baseHealth: 11
     baseAttack: 6
     baseDefense: 6
+    playerName: Asthym
+    level: 1
     typeArmes: 3
     icon: {fileID: -2106310008, guid: 61bd406627d90ca438cec49a5d90699b, type: 3}
-    playerName: Asthym
     health: 10
     attack: 5
     defense: 4
     isInvincible: 0
     dead: 0
-    level: 1
     healthUp: 4
     attackUp: 2
     defenseUp: 5
@@ -7713,7 +7713,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.4
+  m_fontSize: 23.9
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -10437,7 +10437,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.7
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11127,7 +11127,7 @@ MonoBehaviour:
   topTint: {r: 0.4073271, g: 0.4528302, b: 0.4001424, a: 1}
   bottomTint: {r: 0.17439365, g: 0.2830189, b: 0.16197935, a: 1}
   castShadow: 1
-  m_InstantiatedMaterial: {fileID: 2065418672}
+  m_InstantiatedMaterial: {fileID: 2008464246}
 --- !u!1 &1219503280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5460013306378923696, guid: c530a022efb94f64280ce4e300ba9832,
@@ -13185,15 +13185,15 @@ MonoBehaviour:
     baseHealth: 7
     baseAttack: 10
     baseDefense: 5
+    playerName: Maj
+    level: 1
     typeArmes: 3
     icon: {fileID: -884922617, guid: 61bd406627d90ca438cec49a5d90699b, type: 3}
-    playerName: Maj
     health: 10
     attack: 5
     defense: 4
     isInvincible: 0
     dead: 0
-    level: 1
     healthUp: 3
     attackUp: 5
     defenseUp: 2
@@ -13633,10 +13633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5204501c1caa191458f9a1a8694985d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1731987398}
-  currentIcon: {fileID: 314259520}
-  currentName: {fileID: 1957032312}
-  deadPlaceHolder: {fileID: 21300000, guid: 910e21cfdeae4984fb82d9052c89ccff, type: 3}
+  _chosePlayer: {fileID: 1731987398}
+  _currentIcon: {fileID: 314259520}
+  _currentName: {fileID: 1957032312}
 --- !u!1 &1538361417
 GameObject:
   m_ObjectHideFlags: 0
@@ -15518,13 +15517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c42e51c0f26e7c47b3bd93380749ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  mulUp: 1.2
-  mulDown: 0.8
-  mulNeutre: 1
-  dmgModificator: 1
-  dmgModificatorEnemy: 1
-  rayon: {fileID: 6244606595325419914}
+  _rayon: {fileID: 6244606595325419914}
+  _mulUp: 1.2
+  _mulDown: 0.8
+  _mulNeutre: 1
 --- !u!114 &1731987397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15541,14 +15537,16 @@ MonoBehaviour:
   currentEnnemi: {fileID: 0}
   currentEnnemiPosition: {x: 0, y: 0, z: 0}
   currentEnnemiAtkPosition: {x: 0, y: 0, z: 0}
-  prefabEnnemis:
-  - {fileID: 7451721286150282617, guid: cad981bc85506894fa67de7ea7d0cbbf, type: 3}
-  - {fileID: 3487281267952212117, guid: b97cf85f2b0d2274397e5123c67562ad, type: 3}
-  - {fileID: 4969601669644634871, guid: 9ef44965d78a2954da3026eb4ed771a8, type: 3}
   emplacementEnnemis:
   - {fileID: 823701432}
   - {fileID: 689909838}
   - {fileID: 1130521947}
+  nbEnnemisRestants: 0
+  xp: 0
+  prefabEnnemis:
+  - {fileID: 7451721286150282617, guid: cad981bc85506894fa67de7ea7d0cbbf, type: 3}
+  - {fileID: 3487281267952212117, guid: b97cf85f2b0d2274397e5123c67562ad, type: 3}
+  - {fileID: 4969601669644634871, guid: 9ef44965d78a2954da3026eb4ed771a8, type: 3}
   emplacementAtkEnnemis:
   - {fileID: 95510928}
   - {fileID: 1110844229}
@@ -15561,8 +15559,6 @@ MonoBehaviour:
   - {fileID: 1497671559}
   - {fileID: 505054359}
   - {fileID: 327225458}
-  nbEnnemisRestants: 0
-  xp: 0
   victoryScreen: {fileID: 825287887}
   ennemisAGenerer: 2
   ennemisMaxAGenerer: 3
@@ -15578,24 +15574,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6e953f9d3d0104ab5ae3b6ff9dc933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  panelGray: {fileID: 866446340}
-  panelMaj: {fileID: 1692514540}
-  panelAsthym: {fileID: 561344278}
-  deathScreen: {fileID: 1834279181}
-  dead: {fileID: 429781715}
-  deathRetryButton: {fileID: 0}
-  playerEmplacement:
+  _changePlayerGray: {fileID: 866446340}
+  _changePlayerMaj: {fileID: 1692514540}
+  _changePlayerAsthym: {fileID: 561344278}
+  _deathScreen: {fileID: 1834279181}
+  _deathRetryButton: {fileID: 1227589880}
+  _playerEmplacement:
   - {fileID: 1875495415}
   - {fileID: 565071201}
   - {fileID: 842977172}
-  playerEmplacementAtk:
+  _playerEmplacementAtk:
   - {fileID: 79146009}
   - {fileID: 1608643163}
   - {fileID: 1076042197}
-  currentPlayerEmplacement: {fileID: 0}
-  currentPlayerEmplacementAtk: {fileID: 0}
-  players: []
 --- !u!114 &1731987399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15608,10 +15599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded0cf6f18b015d47bf218badc44f21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBooste: 1.2
-  currentEnemy: {fileID: 0}
   currentEnemyPosition: {fileID: 0}
   currentEnemyGameObject: {fileID: 0}
+  currentEnemy: {fileID: 0}
+  attackBooste: 1.2
 --- !u!114 &1731987400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15645,10 +15636,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1c34682395f674b82c7189239863f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPlayer: {fileID: 927783794}
   pA: 0
   firstTurnPass: 0
-  nbTurn: 0
+  uiPlayer: {fileID: 927783794}
   hasAtkBuff: 0
   atkBuffCooldown: 0
   atkBuffPower: 1.2
@@ -15689,12 +15679,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bd9d1fc9a69ad4694a1aa4893fb363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGuard: 0
   panneauArmes: {fileID: 1822776602}
   healParticle: {fileID: 2099209696}
   atkParticle: {fileID: 1369638510}
   defParticle: {fileID: 742620067}
   percentHealthHealed: 25
-  isInGuard: 0
 --- !u!114 &1731987404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17290,7 +17280,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.85
+  m_fontSize: 32.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17506,6 +17496,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &2008464246
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom_GrassComputeHLSL(Clone)
+  m_Shader: {fileID: 4800000, guid: c12da51703aef07499f628dc463f8920, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AmbientAdjustment: 3
+    - _BlendFloor: 0
+    - _Fade: -0.1
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1001 &2013683801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17792,33 +17809,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064877539}
   m_CullTransparentMesh: 1
---- !u!21 &2065418672
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_GrassComputeHLSL(Clone)
-  m_Shader: {fileID: 4800000, guid: c12da51703aef07499f628dc463f8920, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AmbientAdjustment: 3
-    - _BlendFloor: 0
-    - _Fade: -0.1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &2081841805
 PrefabInstance:
   m_ObjectHideFlags: 0

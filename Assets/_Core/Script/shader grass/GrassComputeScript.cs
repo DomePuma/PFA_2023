@@ -4,7 +4,6 @@
 // for the base setup for compute shaders
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEditor;
 
 [ExecuteInEditMode]

@@ -20,7 +20,7 @@ public class EnemyAction : MonoBehaviour
         //Attaque chargée
         if(nbTurnSA == 3)
         {
-            if(attackScript.player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
+            if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
             {
                 attackScript.AttackEnemyRiposte(currentEnemy, attackBooste);
                 currentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
@@ -41,7 +41,7 @@ public class EnemyAction : MonoBehaviour
                 case 0:
                 {
                     //Attaque
-                    if(attackScript.player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
+                    if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
                     {
                         attackScript.AttackEnemyRiposte(currentEnemy, 1f);
                         currentEnemy.enemy.currentAnimator.SetTrigger("Attack");
@@ -64,9 +64,9 @@ public class EnemyAction : MonoBehaviour
                     currentEnemy.enemy.currentAnimator.SetTrigger("Defense");
                     nbTurnSA++;
             
-                    if(attackScript.player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray") 
+                    if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray") 
                     {
-                        attackScript.player.GetComponentInChildren<Animator>().SetTrigger("!EnemyAtk");
+                        attackScript.Player.GetComponentInChildren<Animator>().SetTrigger("!EnemyAtk");
                     }
             
                     break;

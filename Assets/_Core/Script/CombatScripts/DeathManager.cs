@@ -12,7 +12,7 @@ public class DeathManager : MonoBehaviour
     
     private void Start() 
     {
-        players = FindObjectOfType<ChosePlayer>().players;
+        players = FindObjectOfType<ChosePlayer>().PlayerList;
     }
     
     private void Update()

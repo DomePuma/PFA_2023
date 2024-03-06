@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using PathCreation.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace PathCreation.Examples {
+namespace PathCreation.Examples
+{
     public class RoadMeshCreator : PathSceneTool {
         [Header ("Road settings")]
         public float roadWidth = .4f;

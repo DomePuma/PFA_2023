@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.000017150645, g: 0.000000026425553, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.000017150636, g: 0.000000026425553, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4881,7 +4881,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.25
+  m_fontSize: 23.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6733,15 +6733,15 @@ MonoBehaviour:
     baseHealth: 11
     baseAttack: 6
     baseDefense: 6
+    playerName: Asthym
+    level: 1
     typeArmes: 3
     icon: {fileID: -2106310008, guid: 61bd406627d90ca438cec49a5d90699b, type: 3}
-    playerName: Asthym
     health: 10
     attack: 5
     defense: 4
     isInvincible: 0
     dead: 0
-    level: 1
     healthUp: 4
     attackUp: 2
     defenseUp: 5
@@ -9173,7 +9173,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.85
+  m_fontSize: 32.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9308,7 +9308,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.7
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12334,12 +12334,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bd9d1fc9a69ad4694a1aa4893fb363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGuard: 0
   panneauArmes: {fileID: 658866220}
   healParticle: {fileID: 849592409}
   atkParticle: {fileID: 1580057192}
   defParticle: {fileID: 1931598801}
   percentHealthHealed: 25
-  isInGuard: 0
 --- !u!114 &883410581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12374,10 +12374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1c34682395f674b82c7189239863f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPlayer: {fileID: 387402957}
   pA: 0
   firstTurnPass: 0
-  nbTurn: 0
+  uiPlayer: {fileID: 387402957}
   hasAtkBuff: 0
   atkBuffCooldown: 0
   atkBuffPower: 1.2
@@ -12417,10 +12416,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded0cf6f18b015d47bf218badc44f21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBooste: 1.2
-  currentEnemy: {fileID: 0}
   currentEnemyPosition: {fileID: 0}
   currentEnemyGameObject: {fileID: 0}
+  currentEnemy: {fileID: 0}
+  attackBooste: 1.2
 --- !u!114 &883410585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12433,12 +12432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6e953f9d3d0104ab5ae3b6ff9dc933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  currentPlayerEmplacement: {fileID: 0}
+  currentPlayerEmplacementAtk: {fileID: 0}
+  players: []
   panelGray: {fileID: 878191509}
   panelMaj: {fileID: 19222235}
   panelAsthym: {fileID: 344239236}
   deathScreen: {fileID: 184502615}
-  dead: {fileID: 1921445805}
   deathRetryButton: {fileID: 1553305444}
   playerEmplacement:
   - {fileID: 713092766}
@@ -12448,9 +12448,6 @@ MonoBehaviour:
   - {fileID: 2141785013}
   - {fileID: 63620824}
   - {fileID: 1861890005}
-  currentPlayerEmplacement: {fileID: 0}
-  currentPlayerEmplacementAtk: {fileID: 0}
-  players: []
 --- !u!114 &883410587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12463,13 +12460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c42e51c0f26e7c47b3bd93380749ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  mulUp: 1.2
-  mulDown: 0.8
-  mulNeutre: 1
-  dmgModificator: 1
-  dmgModificatorEnemy: 1
-  rayon: {fileID: 73714416}
+  _rayon: {fileID: 73714416}
+  _mulUp: 1.2
+  _mulDown: 0.8
+  _mulNeutre: 1
 --- !u!4 &883410588
 Transform:
   m_ObjectHideFlags: 0
@@ -12501,14 +12495,16 @@ MonoBehaviour:
   currentEnnemi: {fileID: 0}
   currentEnnemiPosition: {x: 0, y: 0, z: 0}
   currentEnnemiAtkPosition: {x: 0, y: 0, z: 0}
-  prefabEnnemis:
-  - {fileID: 7451721286150282617, guid: cad981bc85506894fa67de7ea7d0cbbf, type: 3}
-  - {fileID: 3487281267952212117, guid: b97cf85f2b0d2274397e5123c67562ad, type: 3}
-  - {fileID: 4969601669644634871, guid: 9ef44965d78a2954da3026eb4ed771a8, type: 3}
   emplacementEnnemis:
   - {fileID: 1512404161}
   - {fileID: 845360675}
   - {fileID: 978823816}
+  nbEnnemisRestants: 0
+  xp: 0
+  prefabEnnemis:
+  - {fileID: 7451721286150282617, guid: cad981bc85506894fa67de7ea7d0cbbf, type: 3}
+  - {fileID: 3487281267952212117, guid: b97cf85f2b0d2274397e5123c67562ad, type: 3}
+  - {fileID: 4969601669644634871, guid: 9ef44965d78a2954da3026eb4ed771a8, type: 3}
   emplacementAtkEnnemis:
   - {fileID: 1562478087}
   - {fileID: 1694707533}
@@ -12521,8 +12517,6 @@ MonoBehaviour:
   - {fileID: 265974352}
   - {fileID: 358305962}
   - {fileID: 575374353}
-  nbEnnemisRestants: 0
-  xp: 0
   victoryScreen: {fileID: 895596452}
   ennemisAGenerer: 2
   ennemisMaxAGenerer: 3
@@ -18287,7 +18281,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.35
+  m_fontSize: 29.6
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21836,7 +21830,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.1
+  m_fontSize: 26.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -22462,10 +22456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5204501c1caa191458f9a1a8694985d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 883410585}
-  currentIcon: {fileID: 1487667366}
-  currentName: {fileID: 674391137}
-  deadPlaceHolder: {fileID: 21300000, guid: 910e21cfdeae4984fb82d9052c89ccff, type: 3}
+  _chosePlayer: {fileID: 0}
+  _currentIcon: {fileID: 0}
+  _currentName: {fileID: 0}
 --- !u!1 &1758555971
 GameObject:
   m_ObjectHideFlags: 0
@@ -23076,7 +23069,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.4
+  m_fontSize: 23.9
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -25603,15 +25596,15 @@ MonoBehaviour:
     baseHealth: 7
     baseAttack: 10
     baseDefense: 5
+    playerName: Maj
+    level: 1
     typeArmes: 3
     icon: {fileID: -884922617, guid: 61bd406627d90ca438cec49a5d90699b, type: 3}
-    playerName: Maj
     health: 10
     attack: 5
     defense: 4
     isInvincible: 0
     dead: 0
-    level: 1
     healthUp: 3
     attackUp: 5
     defenseUp: 2

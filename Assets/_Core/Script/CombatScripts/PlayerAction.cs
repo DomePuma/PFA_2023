@@ -15,7 +15,7 @@ public class PlayerAction : MonoBehaviour
 
     public void Atk()
     {
-        chosePlayer.player.GetComponentInChildren<Animator>().SetTrigger("Attack");
+        chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Attack");
         attackScript.Attack(enemyManager.currentEnnemi);
         turnManager.pA = 0;
     }
@@ -25,7 +25,7 @@ public class PlayerAction : MonoBehaviour
         Debug.Log("Attaques Spéciales");
         uiSorts.SetActive(true);
         
-        switch(chosePlayer.currentPlayer)
+        switch(chosePlayer.CurrentPlayer)
         {
             case 0:
             {
@@ -51,7 +51,7 @@ public class PlayerAction : MonoBehaviour
     public void Epuipe()
     {
         Debug.Log("Equipe");
-        switch(chosePlayer.currentPlayer)
+        switch(chosePlayer.CurrentPlayer)
         {
             case 0:
             {
@@ -79,9 +79,9 @@ public class PlayerAction : MonoBehaviour
 
     public void Fuite(string sceneName)
     {
-        for(int i = 0; i < chosePlayer.players.Count; i++)
+        for(int i = 0; i < chosePlayer.PlayerList.Count; i++)
         {
-            chosePlayer.players[i].gameObject.GetComponentInChildren<Animator>().SetTrigger("Fuite");
+            chosePlayer.PlayerList[i].gameObject.GetComponentInChildren<Animator>().SetTrigger("Fuite");
         }
 
         StartCoroutine(FuiteTimer(sceneName));
@@ -90,7 +90,7 @@ public class PlayerAction : MonoBehaviour
 
     public void QuitUI()
     {
-        switch(chosePlayer.currentPlayer)
+        switch(chosePlayer.CurrentPlayer)
         {
             case 0:
             {

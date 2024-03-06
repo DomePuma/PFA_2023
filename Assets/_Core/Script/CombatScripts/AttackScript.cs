@@ -2,42 +2,68 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    public GameObject player;
-    public float dmgModificator = 1;
-    public float dmgModificatorEnemy = 1;
-    public GameObject rayon;
+    [SerializeField] private GameObject _rayon;
+    [SerializeField] private float _mulUp = 1.2f;
+    [SerializeField] private float _mulDown = 0.8f;
+    [SerializeField] private float _mulNeutre = 1f;
+
+    private GameObject _player;
+    private float _playerAtk;
+    private float _playerDef;
+    private float _enemyDefense;
+    private float _enemyAttack;
+    private float _damageModifier;
+    private float _damage;
+    private TurnManager _turnManager;
+    private float _damageModificator = 1;
+    private float _damageModificatorEnemy = 1;
     
-    [SerializeField] private float mulUp = 1.2f, mulDown = 0.8f, mulNeutre = 1f;
+    public GameObject Player
+    {
+        get => _player;
+        set => _player = value;
+    }
+    
+    public float DamageModificator
+    {
+        get => _damageModificator;
+        set => _damageModificator = value;
+    }
+    
+    public float DamageModificatorEnemy
+    {
+        get => _damageModificatorEnemy;
+        set => _damageModificatorEnemy = value;
+    }
 
-    private float playerAtk, playerDef;
-    private float enemyDef, enemyAtk;
-    private float dmgMod;
-    private float dmg;
-    private TurnManager turnManager;
-
+    public GameObject Rayon
+    {
+        get => _rayon;
+    }
+    
     public void Attack(EnemyStats enemy)
     {
-        playerAtk = player.GetComponentInChildren<PlayerStats>().player.attack;
-        enemyDef = enemy.enemy.defense;
+        _playerAtk = Player.GetComponentInChildren<PlayerStats>().player.attack;
+        _enemyDefense = enemy.enemy.defense;
 
-        if(turnManager.pA > 0)
+        if(_turnManager.pA > 0)
         {
-            switch(player.GetComponentInChildren<PlayerStats>().player.typeArmes)
+            switch(Player.GetComponentInChildren<PlayerStats>().player.typeArmes)
             {
                 case TypeArme.Autre:
-                    CalculDmgAlly(enemy, mulNeutre);
+                    CalculDmgAlly(enemy, _mulNeutre);
                     break;
                 case TypeArme.Ciseaux:
                     switch(enemy.enemy.type)
                     {
                         case MonsterType.Vegetal:
-                            CalculDmgAlly(enemy, mulUp);
+                            CalculDmgAlly(enemy, _mulUp);
                             break;
                         case MonsterType.Mineral:
-                            CalculDmgAlly(enemy, mulDown);
+                            CalculDmgAlly(enemy, _mulDown);
                             break;
                         case MonsterType.Animal:
-                            CalculDmgAlly(enemy, mulNeutre);
+                            CalculDmgAlly(enemy, _mulNeutre);
                             break;
                     }
                     break;
@@ -45,13 +71,13 @@ public class AttackScript : MonoBehaviour
                     switch(enemy.enemy.type)
                     {
                         case MonsterType.Vegetal:
-                            CalculDmgAlly(enemy, mulNeutre);
+                            CalculDmgAlly(enemy, _mulNeutre);
                             break;
                         case MonsterType.Mineral:
-                            CalculDmgAlly(enemy, mulUp);
+                            CalculDmgAlly(enemy, _mulUp);
                             break;
                         case MonsterType.Animal:
-                            CalculDmgAlly(enemy, mulDown);
+                            CalculDmgAlly(enemy, _mulDown);
                             break;
                     }
                     break;
@@ -59,13 +85,13 @@ public class AttackScript : MonoBehaviour
                     switch(enemy.enemy.type)
                     {
                         case MonsterType.Vegetal:
-                            CalculDmgAlly(enemy, mulDown);
+                            CalculDmgAlly(enemy, _mulDown);
                             break;
                         case MonsterType.Mineral:
-                            CalculDmgAlly(enemy, mulNeutre);
+                            CalculDmgAlly(enemy, _mulNeutre);
                             break;
                         case MonsterType.Animal:
-                            CalculDmgAlly(enemy, mulUp);
+                            CalculDmgAlly(enemy, _mulUp);
                             break;
                     }
                     break;
@@ -80,39 +106,39 @@ public class AttackScript : MonoBehaviour
 
     public void AttackEnemyRiposte(EnemyStats enemy, float buff)
     {
-        enemyAtk = enemy.enemy.attack;
-        playerDef = player.GetComponentInChildren<PlayerStats>().player.defense;
+        _enemyAttack = enemy.enemy.attack;
+        _playerDef = Player.GetComponentInChildren<PlayerStats>().player.defense;
         CalculRipostDmgEnemy(enemy, buff);
     }
 
     public void LevelUP(int level)
     {
-        player.GetComponentInChildren<PlayerStats>().player.Level_up_stat(level);
+        Player.GetComponentInChildren<PlayerStats>().player.Level_up_stat(level);
     }
     
     public void AttackEnemy(EnemyStats enemy, float buff)
     {
-        enemyAtk = enemy.enemy.attack;
-        playerDef = player.GetComponentInChildren<PlayerStats>().player.defense;
+        _enemyAttack = enemy.enemy.attack;
+        _playerDef = Player.GetComponentInChildren<PlayerStats>().player.defense;
         CalculDmgEnemy(buff);
     }
 
     private void CalculDmgAlly(EnemyStats enemy, float affinity)
     {
         enemy.gameObject.GetComponentInChildren<Animator>().SetTrigger("Hurt");
-        dmg = (playerAtk*(100/(enemyDef + 100)))*affinity;
-        dmgMod = dmg * dmgModificator;
-        Debug.Log(dmgMod);
-        turnManager.pA = 0;
-        enemy.enemy.TakeDmg(dmgMod);
+        _damage = _playerAtk*(100/(_enemyDefense + 100))*affinity;
+        _damageModifier = _damage * DamageModificator;
+        Debug.Log(_damageModifier);
+        _turnManager.pA = 0;
+        enemy.enemy.TakeDmg(_damageModifier);
     }
     
     private void CalculRipostDmgEnemy(EnemyStats enemy, float buff)
     {
-        player.GetComponentInChildren<Animator>().SetTrigger("EnnemiAtk");
-        dmg = (enemyAtk*(100/(playerDef + 100)));
-        dmgMod = ((dmg * buff) * dmgModificatorEnemy) * .8f;
-        player.gameObject.GetComponentInChildren<PlayerStats>().player.TakeDmg(dmgMod);
+        Player.GetComponentInChildren<Animator>().SetTrigger("EnnemiAtk");
+        _damage = (_enemyAttack*(100/(_playerDef + 100)));
+        _damageModifier = ((_damage * buff) * DamageModificatorEnemy) * .8f;
+        Player.gameObject.GetComponentInChildren<PlayerStats>().player.TakeDmg(_damageModifier);
         CalculRiposteDmg(enemy);
     }
     
@@ -120,32 +146,32 @@ public class AttackScript : MonoBehaviour
     {
         
         float enemyDefTemp = enemy.enemy.defense;
-        float playerAtkTemp = player.GetComponentInChildren<PlayerStats>().player.attack;
-        dmg = (playerAtkTemp*(100/(enemyDefTemp + 100)));
-        dmgMod = (dmg * dmgModificator) * .6f;
-        enemy.enemy.TakeDmg(dmgMod);
+        float playerAtkTemp = Player.GetComponentInChildren<PlayerStats>().player.attack;
+        _damage = playerAtkTemp*(100/(enemyDefTemp + 100));
+        _damageModifier = _damage * DamageModificator * .6f;
+        enemy.enemy.TakeDmg(_damageModifier);
     }
     
     private void CalculDmgEnemy(float buff)
     {
-        dmg = (enemyAtk*(100/(playerDef + 100)));
-        dmgMod = (dmg * buff) * dmgModificatorEnemy;
-        Debug.Log(dmgMod);
-        player.gameObject.GetComponentInChildren<PlayerStats>().player.TakeDmg((int)dmgMod);
+        _damage = (_enemyAttack*(100/(_playerDef + 100)));
+        _damageModifier = (_damage * buff) * DamageModificatorEnemy;
+        Debug.Log(_damageModifier);
+        Player.gameObject.GetComponentInChildren<PlayerStats>().player.TakeDmg((int)_damageModifier);
     }
 
     private void Update() 
     {
-        player = FindObjectOfType<ChosePlayer>().player;
+        Player = FindObjectOfType<ChosePlayer>().Player;
     }
 
     private void Start() 
     {
-        player = FindObjectOfType<ChosePlayer>().player;
+        Player = FindObjectOfType<ChosePlayer>().Player;
     }
 
     private void Awake() 
     {
-        turnManager = FindObjectOfType<TurnManager>();
+        _turnManager = FindObjectOfType<TurnManager>();
     }
 }

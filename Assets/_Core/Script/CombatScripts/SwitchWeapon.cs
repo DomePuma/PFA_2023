@@ -15,7 +15,7 @@ public class SwitchWeapon : MonoBehaviour
 
     private void SelectFirstTime()
     {
-        player = chosePlayer.players[0].GetComponentInChildren<PlayerStats>();
+        player = chosePlayer.PlayerList[0].GetComponentInChildren<PlayerStats>();
         
         if(player.player.typeArmes == TypeArme.Ciseaux)
         {
