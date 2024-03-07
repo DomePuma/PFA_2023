@@ -4,35 +4,35 @@ using System.Collections.Generic;
 
 public class DeathManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] grayButtons;
-    [SerializeField] private GameObject[] asthymButtons;
-    [SerializeField] private GameObject[] majButtons;
+    [SerializeField] private GameObject[] _grayButtons;
+    [SerializeField] private GameObject[] _asthymButtons;
+    [SerializeField] private GameObject[] _majButtons;
     
-    private List<GameObject> players;
+    private List<GameObject> _players;
     
     private void Start() 
     {
-        players = FindObjectOfType<ChosePlayer>().PlayerList;
+        _players = FindObjectOfType<ChosePlayer>().PlayerList;
     }
     
     private void Update()
     {
-        if(players[0].GetComponentInChildren<PlayerStats>().player.dead == true)
+        if(_players[0].GetComponentInChildren<PlayerStats>().player.dead == true)
         {
-            grayButtons[0].GetComponentInChildren<Button>().interactable = false;
-            grayButtons[1].GetComponentInChildren<Button>().interactable = false;
+            _grayButtons[0].GetComponentInChildren<Button>().interactable = false;
+            _grayButtons[1].GetComponentInChildren<Button>().interactable = false;
         }
         
-        if(players[1].GetComponentInChildren<PlayerStats>().player.dead == true)
+        if(_players[1].GetComponentInChildren<PlayerStats>().player.dead == true)
         {
-            asthymButtons[0].GetComponentInChildren<Button>().interactable = false;
-            asthymButtons[1].GetComponentInChildren<Button>().interactable = false;
+            _asthymButtons[0].GetComponentInChildren<Button>().interactable = false;
+            _asthymButtons[1].GetComponentInChildren<Button>().interactable = false;
         }
         
-        if(players[2].GetComponentInChildren<PlayerStats>().player.dead == true)
+        if(_players[2].GetComponentInChildren<PlayerStats>().player.dead == true)
         {
-            majButtons[0].GetComponentInChildren<Button>().interactable = false;
-            majButtons[1].GetComponentInChildren<Button>().interactable = false;
+            _majButtons[0].GetComponentInChildren<Button>().interactable = false;
+            _majButtons[1].GetComponentInChildren<Button>().interactable = false;
         }
     }
 }

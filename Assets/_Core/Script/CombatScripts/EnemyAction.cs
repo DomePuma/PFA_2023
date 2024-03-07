@@ -2,36 +2,55 @@ using UnityEngine;
 
 public class EnemyAction : MonoBehaviour
 {
-    public GameObject currentEnemyPosition;
-    public GameObject currentEnemyGameObject;
-    public EnemyStats currentEnemy;
+    [SerializeField] private float _boostAttack = 1.2f;
     
-    [SerializeField] private float attackBooste = 1.2f;
+    private GameObject _currentEnemyPosition;
+    private GameObject _currentEnemyGameObject;
+    private EnemyStats _currentEnemy;
+    private EnemyManager _enemyManager;
+    private AttackScript _attackScript;
+    private int _nbTurnSA;
+    private SpellManager _spellManager;
     
-    private EnemyManager enemyManager;
-    private AttackScript attackScript;
-    private int nbTurnSA;
-    private SpellManager spellManager;
-    private TurnManager turnManager;
+    public GameObject CurrentEnemyPosition
+    {
+        get => _currentEnemyPosition;
+        set => _currentEnemyPosition = value;
+    }
 
+    public GameObject CurrentEnemyGameObject
+    {
+        get => _currentEnemyGameObject;
+        set => _currentEnemyGameObject = value; 
+    }
+
+    public EnemyStats CurrentEnemy
+    {
+        get => _currentEnemy;
+        set => _currentEnemy = value;
+    }
+    
     public void EnemyTurn()
     {
-        currentEnemy = ChoseEnemy();
+        CurrentEnemy = ChoseEnemy();
         //Attaque chargée
-        if(nbTurnSA == 3)
+        if(_nbTurnSA == 3)
         {
-            if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
+            if(_attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && _spellManager.isInGuard == true)
             {
-                attackScript.AttackEnemyRiposte(currentEnemy, attackBooste);
-                currentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
-                nbTurnSA = 0;
-                Debug.Log("RiposteAtkFort");
+                _attackScript.AttackEnemyRiposte(CurrentEnemy, _boostAttack);
+                
+                CurrentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
+                
+                _nbTurnSA = 0;
             } 
             else 
             {
-                attackScript.AttackEnemy(currentEnemy, attackBooste);
-                currentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
-                nbTurnSA = 0;                
+                _attackScript.AttackEnemy(CurrentEnemy, _boostAttack);
+                
+                CurrentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
+                
+                _nbTurnSA = 0;                
             }    
         }
         else
@@ -41,34 +60,38 @@ public class EnemyAction : MonoBehaviour
                 case 0:
                 {
                     //Attaque
-                    if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && spellManager.isInGuard == true)
+                    if(_attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray" && _spellManager.isInGuard == true)
                     {
-                        attackScript.AttackEnemyRiposte(currentEnemy, 1f);
-                        currentEnemy.enemy.currentAnimator.SetTrigger("Attack");
-                        nbTurnSA++;
-                        Debug.Log("RiposteAtk");
+                        _attackScript.AttackEnemyRiposte(CurrentEnemy, 1f);
+                        
+                        CurrentEnemy.enemy.currentAnimator.SetTrigger("Attack");
+                        
+                        _nbTurnSA++;
                     } 
                     else 
                     {
-                        attackScript.AttackEnemy(currentEnemy, 1f);
-                        currentEnemy.enemy.currentAnimator.SetTrigger("Attack");
-                        nbTurnSA++;
+                        _attackScript.AttackEnemy(CurrentEnemy, 1f);
+                        
+                        CurrentEnemy.enemy.currentAnimator.SetTrigger("Attack");
+                        
+                        _nbTurnSA++;
                     }
                     break;
                 }
                 case 1:
                 {
                     //Defense
-                    currentEnemy.enemy.defense += 100;
-                    currentEnemy.enemy.isInDefense = true;
-                    currentEnemy.enemy.currentAnimator.SetTrigger("Defense");
-                    nbTurnSA++;
+                    CurrentEnemy.enemy.defense += 100;
+                    CurrentEnemy.enemy.isInDefense = true;
+                    
+                    CurrentEnemy.enemy.currentAnimator.SetTrigger("Defense");
+                    
+                    _nbTurnSA++;
             
-                    if(attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray") 
+                    if(_attackScript.Player.GetComponentInChildren<PlayerStats>().player.playerName == "Gray") 
                     {
-                        attackScript.Player.GetComponentInChildren<Animator>().SetTrigger("!EnemyAtk");
+                        _attackScript.Player.GetComponentInChildren<Animator>().SetTrigger("!EnemyAtk");
                     }
-            
                     break;
                 }
             }
@@ -76,20 +99,22 @@ public class EnemyAction : MonoBehaviour
     }
     public void EnemyFirstTurn()
     {
-        currentEnemy = ChoseEnemy();
+        CurrentEnemy = ChoseEnemy();
         
-        if(currentEnemy.enemy.dead)
+        if(CurrentEnemy.enemy.dead)
         {
             ChoseEnemy();
         }
         else
         {
             //Attaque chargée
-            if(nbTurnSA == 3)
+            if(_nbTurnSA == 3)
             {
-                attackScript.AttackEnemyRiposte(currentEnemy, attackBooste);
-                currentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
-                nbTurnSA = 0;
+                _attackScript.AttackEnemyRiposte(CurrentEnemy, _boostAttack);
+                
+                CurrentEnemy.enemy.currentAnimator.SetTrigger("AttackStrong");
+                
+                _nbTurnSA = 0;
             }
             else
             {
@@ -98,18 +123,24 @@ public class EnemyAction : MonoBehaviour
                     case 0:
                     {
                         //Attaque
-                        attackScript.AttackEnemy(currentEnemy, 1f);
-                        currentEnemy.enemy.currentAnimator.SetTrigger("Attack");
-                        nbTurnSA++;
+                        _attackScript.AttackEnemy(CurrentEnemy, 1f);
+                        
+                        CurrentEnemy.enemy.currentAnimator.SetTrigger("Attack");
+                        
+                        _nbTurnSA++;
+                        
                         break;
                     }
                     case 1:
                     {
                         //Defense
-                        currentEnemy.enemy.defense += 100;
-                        currentEnemy.enemy.isInDefense = true;
-                        currentEnemy.enemy.currentAnimator.SetTrigger("Defense");
-                        nbTurnSA++;
+                        CurrentEnemy.enemy.defense += 100;
+                        CurrentEnemy.enemy.isInDefense = true;
+                        
+                        CurrentEnemy.enemy.currentAnimator.SetTrigger("Defense");
+                        
+                        _nbTurnSA++;
+                        
                         break;
                     }
                 }
@@ -119,22 +150,26 @@ public class EnemyAction : MonoBehaviour
 
     private EnemyStats ChoseEnemy()
     {
-        int enemyRandom = Random.Range(0, enemyManager.enemis.Count);
-        currentEnemyGameObject = enemyManager.enemis[enemyRandom].gameObject;
-        EnemyStats enemyAtk = enemyManager.enemis[enemyRandom];
-        currentEnemyPosition = enemyManager.emplacementEnnemis[enemyRandom];
-        if(enemyAtk.enemy.health <= 0)
+        int _enemyRandom = Random.Range(0, _enemyManager.EnemyList.Count);
+        CurrentEnemyGameObject = _enemyManager.EnemyList[_enemyRandom].gameObject;
+        EnemyStats _enemyAtk = _enemyManager.EnemyList[_enemyRandom];
+        CurrentEnemyPosition = _enemyManager.EmplacementEnemyArray[_enemyRandom];
+        
+        if(_enemyAtk.enemy.health <= 0)
         {
             return ChoseEnemy();
         }
-        else return enemyAtk;
+        
+        else 
+        {
+            return _enemyAtk;
+        }               
     }
 
     private void Awake() 
     {
-        spellManager = FindObjectOfType<SpellManager>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-        attackScript = FindObjectOfType<AttackScript>();
-        turnManager = FindObjectOfType<TurnManager>();
+        _spellManager = FindObjectOfType<SpellManager>();
+        _enemyManager = FindObjectOfType<EnemyManager>();
+        _attackScript = FindObjectOfType<AttackScript>();
     } 
 }

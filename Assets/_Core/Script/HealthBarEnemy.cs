@@ -14,6 +14,6 @@ public class HealthBarEnemy : MonoBehaviour
 
     private void Start() 
     {
-        enemyStats = FindObjectOfType<EnemyManager>().enemis[nbEnemy];
+        enemyStats = FindObjectOfType<EnemyManager>().EnemyList[nbEnemy];
     }
 }

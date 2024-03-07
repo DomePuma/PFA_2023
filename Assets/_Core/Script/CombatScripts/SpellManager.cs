@@ -19,7 +19,6 @@ public class SpellManager : MonoBehaviour
     public void ChangementArmes()
     {
         panneauArmes.SetActive(true);
-        //panneauArmes.GetComponent<SwitchWeapon>().SelectButton();
     }
 
     public void MiseEnGarde()

@@ -3,46 +3,46 @@ using System.Collections;
 
 public class PlayerAction : MonoBehaviour
 {
-    [SerializeField] private GameObject uiSorts;
-    [SerializeField] private GameObject[] uiEquipe; 
-    [SerializeField] private GameObject[] spells;
+    [SerializeField] private GameObject _spellUI;
+    [SerializeField] private GameObject[] _teamUIArray; 
+    [SerializeField] private GameObject[] _spellArray;
     
-    private ChosePlayer chosePlayer;
-    private EnemyManager enemyManager;
-    private AttackScript attackScript;
-    private UISelect uISelect;
-    private TurnManager turnManager;
+    private ChosePlayer _chosePlayer;
+    private EnemyManager _enemyManager;
+    private AttackScript _attackScript;
+    private UISelect _uISelect;
+    private TurnManager _turnManager;
 
     public void Atk()
     {
-        chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Attack");
-        attackScript.Attack(enemyManager.currentEnnemi);
-        turnManager.pA = 0;
+        _chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Attack");
+        _attackScript.Attack(_enemyManager.CurrentEnemy);
+        
+        _turnManager.pA = 0;
     }
 
     public void SpecialMove()
     {
-        Debug.Log("Attaques Spéciales");
-        uiSorts.SetActive(true);
+        _spellUI.SetActive(true);
         
-        switch(chosePlayer.CurrentPlayer)
+        switch(_chosePlayer.CurrentPlayer)
         {
             case 0:
             {
-                spells[0].SetActive(true);
-                uISelect.SelectSortGray();
+                _spellArray[0].SetActive(true);
+                _uISelect.SelectSortGray();
                 break;
             }
             case 1:
             {
-                spells[1].SetActive(true);
-                uISelect.SelectSortAsthym();
+                _spellArray[1].SetActive(true);
+                _uISelect.SelectSortAsthym();
                 break;
             }
             case 2:
             {
-                spells[2].SetActive(true);
-                uISelect.SelectSortMaj();
+                _spellArray[2].SetActive(true);
+                _uISelect.SelectSortMaj();
                 break;
             }
         }
@@ -50,28 +50,24 @@ public class PlayerAction : MonoBehaviour
 
     public void Epuipe()
     {
-        Debug.Log("Equipe");
-        switch(chosePlayer.CurrentPlayer)
+        switch(_chosePlayer.CurrentPlayer)
         {
             case 0:
             {
-                Debug.Log("ChangerGray");
-                uiEquipe[0].SetActive(true);
-                uISelect.SelectEquipeGray();
+                _teamUIArray[0].SetActive(true);
+                _uISelect.SelectEquipeGray();
                 break;
             }
             case 1:
             {
-                Debug.Log("ChangerAsthym");
-                uiEquipe[1].SetActive(true);
-                uISelect.SelectEquipeAsthym();
+                _teamUIArray[1].SetActive(true);
+                _uISelect.SelectEquipeAsthym();
                 break;
             }
             case 2:
             {
-                Debug.Log("ChangerMaj");
-                uiEquipe[2].SetActive(true);
-                uISelect.SelectEquipeMaj();
+                _teamUIArray[2].SetActive(true);
+                _uISelect.SelectEquipeMaj();
                 break;
             }
         }
@@ -79,49 +75,48 @@ public class PlayerAction : MonoBehaviour
 
     public void Fuite(string sceneName)
     {
-        for(int i = 0; i < chosePlayer.PlayerList.Count; i++)
+        for(int i = 0; i < _chosePlayer.PlayerList.Count; i++)
         {
-            chosePlayer.PlayerList[i].gameObject.GetComponentInChildren<Animator>().SetTrigger("Fuite");
+            _chosePlayer.PlayerList[i].gameObject.GetComponentInChildren<Animator>().SetTrigger("Fuite");
         }
 
         StartCoroutine(FuiteTimer(sceneName));
-        
     }
 
     public void QuitUI()
     {
-        switch(chosePlayer.CurrentPlayer)
+        switch(_chosePlayer.CurrentPlayer)
         {
             case 0:
             {
-                spells[0].SetActive(false);
-                spells[3].SetActive(false);
+                _spellArray[0].SetActive(false);
+                _spellArray[3].SetActive(false);
                 break;
             }
             case 1:
             {
-                spells[1].SetActive(false);
+                _spellArray[1].SetActive(false);
                 break;
             }
             case 2:
             {
-                spells[2].SetActive(false);
+                _spellArray[2].SetActive(false);
                 break;
             }
         }
 
-        uiSorts.SetActive(false);
-        uISelect.SelectAtk();
+        _spellUI.SetActive(false);
+        _uISelect.SelectAtk();
     }
 
     public void QuitEquipe()
     {
-        for(int i = 0; i < uiEquipe.Length; i++)
+        for(int i = 0; i < _teamUIArray.Length; i++)
         {
-            uiEquipe[i].SetActive(false);
+            _teamUIArray[i].SetActive(false);
         }
 
-        uISelect.SelectAtk();
+        _uISelect.SelectAtk();
     }
 
     private IEnumerator FuiteTimer(string sceneName)
@@ -132,10 +127,10 @@ public class PlayerAction : MonoBehaviour
 
     private void Awake() 
     {
-        chosePlayer = FindObjectOfType<ChosePlayer>();
-        enemyManager = FindObjectOfType<EnemyManager>();
-        attackScript = FindObjectOfType<AttackScript>();
-        turnManager = FindObjectOfType<TurnManager>();
-        uISelect = FindObjectOfType<UISelect>();
+        _chosePlayer = FindObjectOfType<ChosePlayer>();
+        _enemyManager = FindObjectOfType<EnemyManager>();
+        _attackScript = FindObjectOfType<AttackScript>();
+        _turnManager = FindObjectOfType<TurnManager>();
+        _uISelect = FindObjectOfType<UISelect>();
     }
 }

@@ -8,7 +8,7 @@ public class MajAtkTarget : StateMachineBehaviour
         EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
         FindObjectOfType<AttackScript>().Rayon.SetActive(true);
         GameObject startMajAtk = FindObjectOfType<AttackScript>().MajAtk();
-        startMajAtk.transform.position = enemyManager.currentEnnemiPosition;
+        startMajAtk.transform.position = enemyManager.CurrentEnemyPosition;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

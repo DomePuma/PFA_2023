@@ -123,6 +123,33 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!21 &5270505
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom_GrassComputeHLSL(Clone)
+  m_Shader: {fileID: 4800000, guid: c12da51703aef07499f628dc463f8920, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AmbientAdjustment: 3
+    - _BlendFloor: 0
+    - _Fade: -0.1
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &24837007
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +990,7 @@ GameObject:
   - component: {fileID: 134988378}
   - component: {fileID: 134988377}
   m_Layer: 5
-  m_Name: Maj
+  m_Name: MajToAsthym
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,7 +1209,7 @@ GameObject:
   - component: {fileID: 146234001}
   - component: {fileID: 146234000}
   m_Layer: 5
-  m_Name: Asthym
+  m_Name: AsthymToMaj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2166,12 +2193,12 @@ GameObject:
   - component: {fileID: 300894546}
   - component: {fileID: 300894550}
   m_Layer: 5
-  m_Name: HPEnemy2
+  m_Name: HPEnemy3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &300894546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8612,7 +8639,7 @@ GameObject:
   - component: {fileID: 960009491}
   - component: {fileID: 960009490}
   m_Layer: 5
-  m_Name: Asthym
+  m_Name: AsthymToGray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9091,7 +9118,7 @@ GameObject:
   - component: {fileID: 1023221049}
   - component: {fileID: 1023221048}
   m_Layer: 5
-  m_Name: Gray
+  m_Name: GrayToAsthym
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11127,7 +11154,7 @@ MonoBehaviour:
   topTint: {r: 0.4073271, g: 0.4528302, b: 0.4001424, a: 1}
   bottomTint: {r: 0.17439365, g: 0.2830189, b: 0.16197935, a: 1}
   castShadow: 1
-  m_InstantiatedMaterial: {fileID: 2008464246}
+  m_InstantiatedMaterial: {fileID: 5270505}
 --- !u!1 &1219503280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5460013306378923696, guid: c530a022efb94f64280ce4e300ba9832,
@@ -11598,12 +11625,12 @@ GameObject:
   - component: {fileID: 1258079605}
   - component: {fileID: 1258079609}
   m_Layer: 5
-  m_Name: HPEnemy3
+  m_Name: HPEnemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1258079605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13376,7 +13403,7 @@ GameObject:
   - component: {fileID: 1502113266}
   - component: {fileID: 1502113265}
   m_Layer: 5
-  m_Name: Gray
+  m_Name: GrayToMaj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15342,7 +15369,7 @@ GameObject:
   - component: {fileID: 1728897823}
   - component: {fileID: 1728897822}
   m_Layer: 5
-  m_Name: Maj
+  m_Name: MajToGray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15533,35 +15560,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f937beffe40abe43876066c40681dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemis: []
-  currentEnnemi: {fileID: 0}
-  currentEnnemiPosition: {x: 0, y: 0, z: 0}
-  currentEnnemiAtkPosition: {x: 0, y: 0, z: 0}
-  emplacementEnnemis:
-  - {fileID: 823701432}
-  - {fileID: 689909838}
-  - {fileID: 1130521947}
-  nbEnnemisRestants: 0
-  xp: 0
-  prefabEnnemis:
+  _prefabEnemyArray:
   - {fileID: 7451721286150282617, guid: cad981bc85506894fa67de7ea7d0cbbf, type: 3}
   - {fileID: 3487281267952212117, guid: b97cf85f2b0d2274397e5123c67562ad, type: 3}
   - {fileID: 4969601669644634871, guid: 9ef44965d78a2954da3026eb4ed771a8, type: 3}
-  emplacementAtkEnnemis:
+  _enemyLocationArray:
+  - {fileID: 823701432}
+  - {fileID: 689909838}
+  - {fileID: 1130521947}
+  _enemyAtkLocationArray:
   - {fileID: 95510928}
   - {fileID: 1110844229}
   - {fileID: 1933661800}
-  hpBarEnemy:
+  _enemyHealthPointBarArray:
   - {fileID: 24837007}
   - {fileID: 1258079603}
   - {fileID: 300894544}
-  defBuffUI:
+  _defenseBuffUIArray:
   - {fileID: 1497671559}
   - {fileID: 505054359}
   - {fileID: 327225458}
-  victoryScreen: {fileID: 825287887}
-  ennemisAGenerer: 2
-  ennemisMaxAGenerer: 3
+  _enemiesToGenerateCount: 2
+  _enemiesToGenerateMaxCount: 3
+  _victoryScreen: {fileID: 825287887}
 --- !u!114 &1731987398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15599,10 +15620,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded0cf6f18b015d47bf218badc44f21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemyPosition: {fileID: 0}
-  currentEnemyGameObject: {fileID: 0}
-  currentEnemy: {fileID: 0}
-  attackBooste: 1.2
+  _boostAttack: 1.2
+  _currentEnemyGameObject: {fileID: 0}
+  _currentEnemy: {fileID: 0}
 --- !u!114 &1731987400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15615,13 +15635,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399d12aa2a1bebf4b8c3a85d60477a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grayButtons:
+  _grayButtons:
   - {fileID: 1502113263}
   - {fileID: 1023221046}
-  asthymButtons:
+  _asthymButtons:
   - {fileID: 146233998}
   - {fileID: 960009488}
-  majButtons:
+  _majButtons:
   - {fileID: 134988375}
   - {fileID: 1728897820}
 --- !u!114 &1731987401
@@ -15657,12 +15677,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70a6967247364e40bccbb12ba9ee09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiSorts: {fileID: 884840394}
-  uiEquipe:
+  _spellUI: {fileID: 884840394}
+  _teamUIArray:
   - {fileID: 866446340}
   - {fileID: 561344278}
   - {fileID: 1692514540}
-  spells:
+  _spellArray:
   - {fileID: 1260011079}
   - {fileID: 1071706632}
   - {fileID: 1207682492}
@@ -17496,33 +17516,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!21 &2008464246
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_GrassComputeHLSL(Clone)
-  m_Shader: {fileID: 4800000, guid: c12da51703aef07499f628dc463f8920, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AmbientAdjustment: 3
-    - _BlendFloor: 0
-    - _Fade: -0.1
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!1001 &2013683801
 PrefabInstance:
   m_ObjectHideFlags: 0

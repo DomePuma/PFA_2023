@@ -21,11 +21,11 @@ public class EndPlayerTurn : StateMachineBehaviour
     //}
     override public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) 
     {
-        TurnManager turnManager = FindObjectOfType<TurnManager>();
-        if(turnManager.pA <= 0)
+        TurnManager _turnManager = FindObjectOfType<TurnManager>();
+        
+        if(_turnManager.pA <= 0)
         {
-            turnManager.PassTurn();
-            Debug.Log("EndPlayerAnim");
+            _turnManager.PassTurn();
         }
     }
 

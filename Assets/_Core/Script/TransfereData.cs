@@ -29,7 +29,7 @@ public class TransfereData : MonoBehaviour
     }
     public void ChangeSceneToExplo(string sceneName)
     {
-        storedXP += (int)FindObjectOfType<EnemyManager>().xp;
+        storedXP += (int)FindObjectOfType<EnemyManager>().XP;
         DontDestroyOnLoad(this.gameObject);
         Destroy(enemiesToTransfere[0]);
         SceneManager.LoadScene(sceneName);

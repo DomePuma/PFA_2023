@@ -22,9 +22,8 @@ public class EndEnnemiTurn : StateMachineBehaviour
     //}
     override public void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) 
     {
-        Debug.Log("EndAnimation" + name);
-        TurnManager turn = FindObjectOfType<TurnManager>();
-        turn.EndTurnEnemy(); 
+        TurnManager _turn = FindObjectOfType<TurnManager>();
+        _turn.EndTurnEnemy(); 
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

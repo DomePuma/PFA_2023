@@ -30,7 +30,7 @@ public class TurnManager : MonoBehaviour
     {
         CheckEnemyDeath();
         
-        if(enemyManager.nbEnnemisRestants == 0)
+        if(enemyManager.EnemyRemainingCount == 0)
         {
             enemyManager.EndFight();
         }
@@ -77,7 +77,7 @@ public class TurnManager : MonoBehaviour
             {
                 Debug.Log("Dead");
                 enemyStats[i].enemy.dead = true;
-                enemyManager.xp += enemyStats[i].enemy.exp;
+                //enemyManager.XP += enemyStats[i].enemy.exp;
                 enemyManager.EnemyDeath();
             }
         }
@@ -85,31 +85,31 @@ public class TurnManager : MonoBehaviour
 
     private void CheckCooldown()
     {
-        for(int i = 0; i < enemyManager.enemis.Count; i++)
+        for(int i = 0; i < enemyManager.EnemyList.Count; i++)
         {
-            if(enemyManager.enemis[i].enemy.isInDefense == true)
+            if(enemyManager.EnemyList[i].enemy.isInDefense == true)
             {
-                if(enemyManager.enemis[i].enemy.hasCooldownDef == false) 
+                if(enemyManager.EnemyList[i].enemy.hasCooldownDef == false) 
                 {
-                    enemyManager.enemis[i].enemy.cooldownDef = 1;
-                    enemyManager.enemis[i].enemy.hasCooldownDef = true;
+                    enemyManager.EnemyList[i].enemy.cooldownDef = 1;
+                    enemyManager.EnemyList[i].enemy.hasCooldownDef = true;
                 }
                 
-                if(enemyManager.enemis[i].enemy.isInDefense == true && enemyManager.enemis[i].enemy.cooldownDef == 0)
+                if(enemyManager.EnemyList[i].enemy.isInDefense == true && enemyManager.EnemyList[i].enemy.cooldownDef == 0)
                 {
-                    enemyAction.currentEnemy.enemy.defense -= 100;
-                    enemyManager.enemis[i].enemy.isInDefense = false;
-                    enemyManager.enemis[i].enemy.hasCooldownDef = false;
+                    enemyAction.CurrentEnemy.enemy.defense -= 100;
+                    enemyManager.EnemyList[i].enemy.isInDefense = false;
+                    enemyManager.EnemyList[i].enemy.hasCooldownDef = false;
                 } 
                 
-                if(enemyManager.enemis[i].enemy.cooldownDef != 0) 
+                if(enemyManager.EnemyList[i].enemy.cooldownDef != 0) 
                 {
-                    enemyManager.enemis[i].enemy.cooldownDef--;
+                    enemyManager.EnemyList[i].enemy.cooldownDef--;
                 }
                 
-                if(enemyManager.enemis[i].enemy.cooldownDef < 0)
+                if(enemyManager.EnemyList[i].enemy.cooldownDef < 0)
                 {
-                    enemyManager.enemis[i].enemy.cooldownDef = 0;         
+                    enemyManager.EnemyList[i].enemy.cooldownDef = 0;         
                 }
             }
         }

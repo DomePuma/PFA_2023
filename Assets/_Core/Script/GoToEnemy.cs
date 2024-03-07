@@ -15,7 +15,7 @@ public class GoToEnemy : StateMachineBehaviour
         Vector3 velocity = Vector3.zero;
         GameObject player = FindObjectOfType<ChosePlayer>().Player;
         EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
-        player.transform.position = Vector3.SmoothDamp(player.transform.position, enemyManager.currentEnnemiAtkPosition, ref velocity, speed * Time.deltaTime);
+        player.transform.position = Vector3.SmoothDamp(player.transform.position, enemyManager.CurrentEnemyAtkPosition, ref velocity, speed * Time.deltaTime);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -15,8 +15,8 @@ public class GoToEnemyEmplacementDragon : StateMachineBehaviour
         Vector3 velocity = Vector3.zero;
         EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
         EnemyAction enemyAction = FindObjectOfType<EnemyAction>();
-        enemyAction.currentEnemyGameObject.transform.position = Vector3.SmoothDamp(enemyAction.currentEnemyGameObject.transform.position, 
-        new Vector3(enemyAction.currentEnemyPosition.transform.position.x, enemyAction.currentEnemyPosition.transform.position.y + 1, enemyAction.currentEnemyPosition.transform.position.z), 
+        enemyAction.CurrentEnemyGameObject.transform.position = Vector3.SmoothDamp(enemyAction.CurrentEnemyGameObject.transform.position, 
+        new Vector3(enemyAction.CurrentEnemyPosition.transform.position.x, enemyAction.CurrentEnemyPosition.transform.position.y + 1, enemyAction.CurrentEnemyPosition.transform.position.z), 
         ref velocity, speed * Time.deltaTime);
 
         //enemyAction.currentEnemyPosition.transform.position

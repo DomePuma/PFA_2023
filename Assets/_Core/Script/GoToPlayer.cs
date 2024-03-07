@@ -15,7 +15,7 @@ public class GoToPlayer : StateMachineBehaviour
         Vector3 velocity = Vector3.zero;
         GameObject currentPlayerEmplacementAtk = FindObjectOfType<ChosePlayer>().CurrentPlayerEmplacementAtk;
         EnemyAction enemyAction = FindObjectOfType<EnemyAction>();
-        enemyAction.currentEnemy.gameObject.transform.position = Vector3.SmoothDamp(enemyAction.currentEnemy.gameObject.transform.position, currentPlayerEmplacementAtk.transform.position, ref velocity, speed * Time.deltaTime); 
+        enemyAction.CurrentEnemy.gameObject.transform.position = Vector3.SmoothDamp(enemyAction.CurrentEnemy.gameObject.transform.position, currentPlayerEmplacementAtk.transform.position, ref velocity, speed * Time.deltaTime); 
     }
 
 
