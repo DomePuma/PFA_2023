@@ -46,7 +46,7 @@ public class AttackScript : MonoBehaviour
         _playerAtk = Player.GetComponentInChildren<PlayerStats>().player.attack;
         _enemyDefense = enemy.enemy.defense;
 
-        if(_turnManager.pA > 0)
+        if(_turnManager.PA > 0)
         {
             switch(Player.GetComponentInChildren<PlayerStats>().player.typeArmes)
             {
@@ -129,7 +129,7 @@ public class AttackScript : MonoBehaviour
         _damage = _playerAtk*(100/(_enemyDefense + 100))*affinity;
         _damageModifier = _damage * DamageModificator;
         Debug.Log(_damageModifier);
-        _turnManager.pA = 0;
+        _turnManager.PA = 0;
         enemy.enemy.TakeDmg(_damageModifier);
     }
     

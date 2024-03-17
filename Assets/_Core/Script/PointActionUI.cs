@@ -7,12 +7,12 @@ public class PointActionUI : MonoBehaviour
 
     private void Update() 
     {
-        if(turnManager.pA == 1)
+        if(turnManager.PA == 1)
         {
             actionPointUI[1].SetActive(false);
         }
         
-        if(turnManager.pA == 2)
+        if(turnManager.PA == 2)
         {
             actionPointUI[1].SetActive(true);
         }

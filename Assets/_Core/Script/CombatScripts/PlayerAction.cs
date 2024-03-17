@@ -18,7 +18,7 @@ public class PlayerAction : MonoBehaviour
         _chosePlayer.Player.GetComponentInChildren<Animator>().SetTrigger("Attack");
         _attackScript.Attack(_enemyManager.CurrentEnemy);
         
-        _turnManager.pA = 0;
+        _turnManager.PA = 0;
     }
 
     public void SpecialMove()

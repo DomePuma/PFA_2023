@@ -23,7 +23,7 @@ public class EndPlayerTurn : StateMachineBehaviour
     {
         TurnManager _turnManager = FindObjectOfType<TurnManager>();
         
-        if(_turnManager.pA <= 0)
+        if(_turnManager.PA <= 0)
         {
             _turnManager.PassTurn();
         }

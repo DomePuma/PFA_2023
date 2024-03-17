@@ -64,13 +64,13 @@ public class ChosePlayer : MonoBehaviour
         CurrentPlayerEmplacementAtk = _playerEmplacementAtk[1];
         CurrentPlayer = 1;
         
-        _turnManager.pA--;
+        _turnManager.PA--;
         
         FindObjectOfType<UISelect>().SelectAtk();
         
         ActionSendCharacterInfo?.Invoke();
 
-        if(_turnManager.pA <= 0)
+        if(_turnManager.PA <= 0)
         {
             _turnManager.PassTurn();
         }
@@ -88,13 +88,13 @@ public class ChosePlayer : MonoBehaviour
         CurrentPlayerEmplacementAtk = _playerEmplacementAtk[2];
         CurrentPlayer = 2;
         
-        _turnManager.pA--;
+        _turnManager.PA--;
         
         FindObjectOfType<UISelect>().SelectAtk();
         
         ActionSendCharacterInfo?.Invoke();
 
-        if(_turnManager.pA <= 0)
+        if(_turnManager.PA <= 0)
         {
             _turnManager.PassTurn();
         }
@@ -112,13 +112,13 @@ public class ChosePlayer : MonoBehaviour
         CurrentPlayerEmplacementAtk = _playerEmplacementAtk[0];
         CurrentPlayer = 0;
         
-        _turnManager.pA--;
+        _turnManager.PA--;
         
         FindObjectOfType<UISelect>().SelectAtk();
         
         ActionSendCharacterInfo?.Invoke();
 
-        if(_turnManager.pA <= 0)
+        if(_turnManager.PA <= 0)
         {
             _turnManager.PassTurn();
         }

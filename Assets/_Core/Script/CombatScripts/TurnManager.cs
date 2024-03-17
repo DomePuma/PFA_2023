@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    public int pA = 0;  
-    public bool firstTurnPass = false;
+    public int PA
+    {
+        get => _pA;
+        set => _pA = value;
+    }
+    
+    private int _pA = 0;  
+    private bool _firstTurnPass = false;
     
     [SerializeField] private GameObject uiPlayer;
     
@@ -56,12 +62,12 @@ public class TurnManager : MonoBehaviour
     public void EndTurnEnemy()
     {
         uiPlayer.SetActive(true);
-        pA = 2;
+        PA = 2;
         hasEnemyAtk = false;
         
-        if(!firstTurnPass) 
+        if(!_firstTurnPass) 
         {
-            firstTurnPass = true;
+            _firstTurnPass = true;
         }
 
         FindObjectOfType<SpellManager>().isInGuard = false;
@@ -164,7 +170,7 @@ public class TurnManager : MonoBehaviour
 
     private void Update() 
     {
-        if(pA <= 0 && hasEnemyAtk == false)
+        if(PA <= 0 && hasEnemyAtk == false)
         {
             uiPlayer.SetActive(false);
         }

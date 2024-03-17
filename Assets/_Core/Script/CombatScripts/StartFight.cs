@@ -19,7 +19,7 @@ public class StartFight : MonoBehaviour
         }
         else
         {
-            turnManager.pA = 2;
+            turnManager.PA = 2;
             UI.SetActive(true);
         }
     }
